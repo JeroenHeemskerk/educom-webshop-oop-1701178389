@@ -1,14 +1,14 @@
 <?php
 
 class HtmlDoc {
-    private function showHtmlStart() {}
-    private function showHeadStart() {}
+    private function showHtmlStart() {echo '<!doctype html><html>';}
+    private function showHeadStart() {echo' <head>';}
     protected function showHeadContent() {}
-    private function showHeadEnd() {}
-    private function showBodyStart() {}
+    private function showHeadEnd() {echo' </head>';}
+    private function showBodyStart() {echo' <body><div class="center">';}
     protected function showBodyContent() {}
-    private function showBodyEnd() {}
-    private function showHtmlEnd() {}
+    private function showBodyEnd() {echo' </div></body>';}
+    private function showHtmlEnd() {echo '</html>';}
     public function show() {
         $this->showHtmlStart();
         $this->showHeadStart();

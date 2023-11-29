@@ -10,12 +10,12 @@ class BasicDoc extends HtmlDoc {
         $this->data = $myData;
       }
     private function showTitle() {echo '<title>'.$this->data['page'].'</title>';}
-    private function showCssLinks() {}
-    private function showHeaderStart() {}
-    private function showHeaderEnd() {}
-    private function showMenu() {echo 'test';}
-    protected function showContent() {echo "hallo";}
-    private function showFooter() {echo 'gelukt';}
+    private function showCssLinks() {echo' <link rel="stylesheet" href="CSS/stylesheet.css">';}
+    private function showHeaderStart() {echo '<header>';}
+    private function showHeaderEnd() {echo '</header>';}
+    private function showMenu() {echo 'Ik weet nog niet hoe deze moet';}
+    protected function showContent() {echo "Dit moet overriden worden";}
+    private function showFooter() {echo '<footer><p>&copy; 2023 Nicole Goris</p></footer>';}
 
     protected function showHeadContent() {
         $this->showTitle();
