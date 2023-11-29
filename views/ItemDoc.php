@@ -8,7 +8,7 @@ class ItemDoc extends BasicDoc {
     protected function showImg() {}
     protected function showPrice() {}
     protected function showDescription() {}
-    protected function showCartButton() {}
+    protected function showCartButton() {}      //Alleen als je bent ingelogd
 
     protected function showContent() {
         $this->showId(); 
@@ -16,7 +16,7 @@ class ItemDoc extends BasicDoc {
         $this->showImg(); 
         $this->showPrice(); 
         $this->showDescription();
-        $this->showCartButton(); 
+        $this->showCartButton();                //Alleen als je bent ingelogd
     }
 }
 
