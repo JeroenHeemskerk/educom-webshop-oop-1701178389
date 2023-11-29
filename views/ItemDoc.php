@@ -1,16 +1,16 @@
 <?php
 require_once "../views/BasicDoc.php";
 
-class ItemDoc extends BasicDoc {
-    private function getItemFromDb() {}
-    protected function showId() {}
-    protected function showName() {}
-    protected function showImg() {}
-    protected function showPrice() {}
-    protected function showDescription() {}
-    protected function showCartButton() {}      //Alleen als je bent ingelogd
+abstract class ItemDoc extends BasicDoc {
+    abstract private function getItemFromDb() {}
+    abstract protected function showId() {}
+    abstract protected function showName() {}
+    abstract protected function showImg() {}
+    abstract protected function showPrice() {}
+    abstract protected function showDescription() {}
+    abstract protected function showCartButton() {}      //Alleen als je bent ingelogd
 
-    protected function showContent() {
+    abstract protected function showContent() {
         $this->showId(); 
         $this->showName();
         $this->showImg(); 
