@@ -6,7 +6,7 @@ class BasicDoc extends HtmlDoc {
     public function __construct($myData) {
         $this->data = $myData;
       }
-    private function showTitle() {echo '<title>'.$this->data['page'].'</title>';}
+    private function showTitle() {echo '<title>' . $this->data['page'] . '</title>';}
     private function showCssLinks() {echo' <link rel="stylesheet" href="../CSS/stylesheet.css">';}
     private function showHeader() {echo '<header><h1>Hier moet de page komen vanuit data</h1></header>';}
     private function showMenu() {echo 'Ik weet nog niet hoe het menu moet.<br>';}
