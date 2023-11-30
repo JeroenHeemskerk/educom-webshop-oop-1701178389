@@ -21,7 +21,7 @@ require_once "../views/BasicDoc.php";
             case "textarea": 
                 echo    '<br><textarea name="' . $fieldName . '" rows="' . $rows . '" cols="' . $cols . '" placeholder="' . $placeholder . '">' . $currentValue . '</textarea><br>' . PHP_EOL;
                 break;
-            case "radio"              
+            //case "radio"              
             default:
                 echo '<input type=' . $type . ' id="' . $fieldName . '" name="' . $fieldName . '" placeholder=' . $placeholder . ' value="' . $currentValue . '">' . PHP_EOL;
                 break;
