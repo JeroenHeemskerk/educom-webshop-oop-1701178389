@@ -5,23 +5,29 @@ require_once "../views/BasicDoc.php";
     private function showOpenForm() {echo '<form action="index.php" method="POST"><div class="invoervelden">';}
     private function showCloseForm() {echo '</div></form>';}
 
-    protected function showFormField($fieldName, $label, $type, $placeholder='', $options=NULL, $rows='', $cols='' )
+    protected function showFormField($fieldName, $label, $type, $placeholder='', $options=NULL, $rows='', $cols='', $labels='' )
     {
         $currentValue = $this->data[$fieldName];
-        echo '<div><label for=' . $fieldName . '>' . $label . ':</label>';
+        echo '<div><label for=' . $fieldName . '>' . $label . ' </label>';
         switch($type) {
             case "select":
                 echo '<select class="sel" id="' . $fieldName . '" name="' . $fieldName . '">
                     <option value=""></option>' . PHP_EOL;
                 foreach ($options as $key => $value) {
-                    echo '<option value="' . $key . '"' . ($currentValue == $key ? ' selected="selected"' : ' ') . '>' . $value . '</option>' . PHP_EOL;
+                    echo '<option value="' . $key . '"' . ($currentValue == $key ? ' selected = "selected"' : ' ') . '>' . $value . '</option>' . PHP_EOL;
                 }  
                 echo '</select>' . PHP_EOL;
                 break;
             case "textarea": 
                 echo    '<br><textarea name="' . $fieldName . '" rows="' . $rows . '" cols="' . $cols . '" placeholder="' . $placeholder . '">' . $currentValue . '</textarea><br>' . PHP_EOL;
                 break;
-            //case "radio"              
+            case "radio":
+                echo '<br>';
+                foreach ($labels as $key => $value) {
+                    echo '<input type="' . $type . '" id="' . $key . '" name="' . $key . '" value="' . $value . '"' . ($currentValue == $key ? 'checked = "checked"' : '') . '>
+                        <label for="' . $key . '">' . $value . '</label><br>';
+                }
+                break;
             default:
                 echo '<input type=' . $type . ' id="' . $fieldName . '" name="' . $fieldName . '" placeholder=' . $placeholder . ' value="' . $currentValue . '">' . PHP_EOL;
                 break;
@@ -30,10 +36,11 @@ require_once "../views/BasicDoc.php";
     }
 
     protected function showFormContent(){
-        $this->showFormField('salut', 'Aaanhef', 'select', '', array('man'=> 'Dhr.', 'woman'=> 'Mvr.'));
-        $this->showFormField('name', 'Naam', 'text', 'Vul hier uw naam in');
-        $this->showFormField('email', 'E-mailadres', 'email', 'Vul hier uw naam in');
+        $this->showFormField('salut', 'Aanhef:', 'select', '', array('man'=> 'Dhr.', 'woman'=> 'Mvr.'));
+        $this->showFormField('name', 'Naam:', 'text', 'Vul hier uw naam in');
+        $this->showFormField('email', 'E-mailadres:', 'email', 'Vul hier uw naam in');
         $this->showFormField('message', 'Waarover wilt u contact opnemen?', 'textarea', 'Vul hier uw vraag in', '', '4', '53');
+        $this->showFormField('com', 'Kies uw communicatievoorkeur:', 'radio', '', '', '', '', array('email'=>'E-mail', 'phone'=>'Telefoon', 'mail'=>'Post'));
     }
 
     protected function showContent() {
