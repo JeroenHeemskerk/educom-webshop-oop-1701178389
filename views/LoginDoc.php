@@ -14,6 +14,4 @@ class LoginDoc extends FormDoc {
         $this->showCloseForm(); 
     }
 }
-
-
 ?>
