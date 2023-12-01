@@ -29,7 +29,7 @@ require_once "../views/BasicDoc.php";
                 }
                 break;
             default:
-                echo '<input class="inputField" type=' . $type . ' id="' . $fieldName . '" name="' . $fieldName . '" placeholder=' . $placeholder . ' value="' . $currentValue . '">' . PHP_EOL;
+                echo '<input class="inputField" type=' . $type . ' id="' . $fieldName . '" name="' . $fieldName . '" placeholder="' . $placeholder . '" value="' . $currentValue . '">' . PHP_EOL;
                 break;
         }
         echo '<span class="error">' . $this->data[$fieldName . 'Err' ] . '</span></div>';
