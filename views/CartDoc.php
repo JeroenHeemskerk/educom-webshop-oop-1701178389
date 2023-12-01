@@ -2,6 +2,10 @@
 require_once "../views/ItemDoc.php";
 
 class CartDoc extends ItemDoc {
+    protected function showHeader()
+    {
+        echo 'Winkelwagen';
+    }
     protected function showContent()
     if(isset($_SESSION["cart"])) 
     {

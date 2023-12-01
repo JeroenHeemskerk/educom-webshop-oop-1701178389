@@ -2,6 +2,10 @@
 require_once "FormDoc.php";
 
 class PasswordDoc extends FormDoc {
+    protected function showHeader()
+    {
+        echo 'Instellingen';
+    }
     protected function showFormContent() {
         $this->showFormField('oldPassword', 'Oude wachtwoord:', 'password', 'Vul hier uw oude wachtwoord in');
         $this->showFormField('password', 'Nieuwe wachtwoord:', 'password', 'Vul hier uw nieuwe wachtwoord in');

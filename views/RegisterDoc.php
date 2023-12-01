@@ -2,6 +2,10 @@
 require_once "FormDoc.php";
 
 class RegisterDoc extends FormDoc {
+    protected function showHeader()
+    {
+        echo 'Aanmelden';
+    }
     protected function showFormContent(){
         $this->showFormField('name', 'Naam:', 'text', 'Vul hier uw naam in');
         $this->showFormField('email', 'E-mailadres:', 'email', 'Vul hier uw e-mailadres in');

@@ -17,7 +17,7 @@ class BasicDoc extends HtmlDoc
     {
         echo '<nav>' . PHP_EOL;                
         $this -> showNavList ();
-        echo '</nav>' . PHP_EOL;
+        echo '</nav><br>' . PHP_EOL;
     }
     private function showNavList()
     {

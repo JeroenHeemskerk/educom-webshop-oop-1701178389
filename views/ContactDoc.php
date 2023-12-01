@@ -2,6 +2,10 @@
 require_once "FormDoc.php";
 
 class ContactDoc extends FormDoc {
+    protected function showHeader()
+    {
+        echo 'Contact';
+    }
     protected function showFormContent(){
         $this->showFormField('salut', 'Aanhef:', 'select', '', array('man'=> 'Dhr.', 'woman'=> 'Mvr.'));
         $this->showFormField('name', 'Naam:', 'text', 'Vul hier uw naam in');
