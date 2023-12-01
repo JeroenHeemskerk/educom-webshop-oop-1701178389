@@ -1,9 +1,9 @@
 <?php
 require_once "../views/BasicDoc.php";
 
- class FormDoc extends BasicDoc {
-    private function showOpenForm() {echo '<form action="index.php" method="POST"><div class="invoervelden">';}
-    private function showCloseForm() {echo '</div></form>';}
+ abstract class FormDoc extends BasicDoc {
+    protected function showOpenForm() {echo '<form action="index.php" method="POST"><div class="invoervelden">';}
+    protected function showCloseForm() {echo '</div></form>';}
 
     protected function showFormField($fieldName, $label, $type, $placeholder='', $options=NULL, $rows='', $cols='', $labels='' )
     {
@@ -29,25 +29,17 @@ require_once "../views/BasicDoc.php";
                 }
                 break;
             default:
-                echo '<input type=' . $type . ' id="' . $fieldName . '" name="' . $fieldName . '" placeholder=' . $placeholder . ' value="' . $currentValue . '">' . PHP_EOL;
+                echo '<input class="inputField" type=' . $type . ' id="' . $fieldName . '" name="' . $fieldName . '" placeholder=' . $placeholder . ' value="' . $currentValue . '">' . PHP_EOL;
                 break;
         }
         echo '<span class="error">' . $this->data[$fieldName . 'Err' ] . '</span></div>';
     }
 
-    protected function showFormContent(){
-        $this->showFormField('salut', 'Aanhef:', 'select', '', array('man'=> 'Dhr.', 'woman'=> 'Mvr.'));
-        $this->showFormField('name', 'Naam:', 'text', 'Vul hier uw naam in');
-        $this->showFormField('email', 'E-mailadres:', 'email', 'Vul hier uw naam in');
-        $this->showFormField('message', 'Waarover wilt u contact opnemen?', 'textarea', 'Vul hier uw vraag in', '', '4', '53');
-        $this->showFormField('com', 'Kies uw communicatievoorkeur:', 'radio', '', '', '', '', array('email'=>'E-mail', 'phone'=>'Telefoon', 'mail'=>'Post'));
+    protected function showFormButton($buttonValue, $pageValue)
+    {
+        echo    '<br><input class="knop" type= "submit" value="' . $buttonValue . '">' . PHP_EOL . 
+                '<input type="hidden" name="page" value="' . $pageValue . '"><br><br>' . PHP_EOL;
     }
-
-    protected function showContent() {
-        $this->showOpenForm(); 
-        $this->showFormContent();
-        $this->showCloseForm(); 
-    }
+    
 }
-
 ?> 
