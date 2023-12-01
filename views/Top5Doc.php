@@ -2,22 +2,16 @@
 require_once "../views/ItemDoc.php";
 
 class Top5Doc extends ItemDoc {
-    //Onderstaande komt uit de class ItemDoc
-    //private function getItemFromDb() {}       
-    //protected function showId() {}            --> ipv id de rank weergeven
-    //protected function showName() {}
-    //protected function showImg() {}           --> Klein plaatje
-    //protected function showPrice() {}         --> Niet weergeven
-    //protected function showDescription() {}   --> Niet weergeven
-    //protected function showCartButton() {}    --> Niet weergeven
-
-    //protected function showContent() {
-    //    $this->showId();              --> ipv id de rank weergeven
-    //    $this->showName();
-    //    $this->showImg();             --> Klein plaatje 
-    //    $this->showPrice();           --> Niet weergeven
-    //    $this->showCartButton();      --> Niet weergeven
-    //}
+    protected function showContent()
+    {
+        $this->showItem("top5", array(
+            array('id' => '1', 'filename' => 'Unlock!_10.png', 'name' => 'Unlock! 10', 'price' => '19.95', 'description' => 'Een leuk spel'),
+            array('id' => '2', 'filename' => 'Turing_machine.png', 'name' => 'Turing Machine', 'price' => '39.95', 'description' => 'Een leuk spel'),
+            array('id' => '3', 'filename' => 'de_crew.png', 'name' => 'De Crew', 'price' => '9.95', 'description' => 'Een leuk spel'),
+            array('id' => '4', 'filename' => 'Fabelfruit.png', 'name' => 'Fabelfruit', 'price' => '24.95', 'description' => 'Een leuk spel'),
+            array('id' => '5', 'filename' => 'paleo.png', 'name' => 'Paleo', 'price' => '39.95', 'description' => 'Een leuk spel')
+        ));
+    }
 }
 
 ?> 
