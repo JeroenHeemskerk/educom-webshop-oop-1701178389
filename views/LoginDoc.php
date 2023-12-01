@@ -2,19 +2,18 @@
 require_once "FormDoc.php";
 
 class LoginDoc extends FormDoc {
-    protected function showFormContent() {
-        echo '<div class="invoervelden">
-        <label for="email">E-mailadres:</label>
-            <input class="sw" type="text" id="email" name="email" placeholder="Typ hier uw e-mailadres" value="' . $data['email'] . '" > 
-            <span class="error">' . $data['emailErr'] . '</span><br>
-        <label for="password">Wachtwoord:</label>
-            <input class="sw" type="password" id="password" name="password" placeholder="Typ hier uw wachtwoord" value="' . $data['password'] . '">
-            <span class="error">' . $data['passwordErr'] . '</span><br>
-        <br>   
-    </div>
-        <input class="knop" type="submit" Value="Inloggen">
-        <input type="hidden" name="page" value="login"><br><br> 
-    </div>';
+    protected function showFormContent(){
+        $this->showFormField('email', 'E-mailadres:', 'email', 'Vul hier uw e-mailadres in');
+        $this->showFormField('password', 'Wachtwoord:', 'password', 'Vul hier uw wachtwoord in');
+    }
+
+    protected function showContent() {
+        $this->showOpenForm(); 
+        $this->showFormContent();
+        $this->showFormButton('Inloggen', 'login');
+        $this->showCloseForm(); 
     }
 }
+
+
 ?>
