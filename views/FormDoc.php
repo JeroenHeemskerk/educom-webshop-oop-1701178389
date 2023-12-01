@@ -1,5 +1,5 @@
 <?php
-require_once "../views/BasicDoc.php";
+require_once "BasicDoc.php";
 
  abstract class FormDoc extends BasicDoc {
     protected function showOpenForm() {echo '<form action="index.php" method="POST"><div class="invoervelden">';}

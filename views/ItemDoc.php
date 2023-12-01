@@ -1,5 +1,5 @@
 <?php
-require_once "../views/BasicDoc.php";
+require_once "BasicDoc.php";
 
 abstract class ItemDoc extends BasicDoc {
     private function getItemFromDb() {echo 'database blijven we nog even af'; }
@@ -15,14 +15,14 @@ abstract class ItemDoc extends BasicDoc {
             {
                 case "shop": 
                     echo '' . $row['id'] . '<br>' . PHP_EOL;
-                    echo '<img src="../Images/' . $row['filename'] . '" width="100" height="100" alt="Afbeelding"><br>' . PHP_EOL; 
+                    echo '<img src="Images/' . $row['filename'] . '" width="100" height="100" alt="Afbeelding"><br>' . PHP_EOL; 
                     break;
                 case "top5":
                     echo '<h2>' . $topNumber . '</h2>' . PHP_EOL;
-                    echo '<img src="../Images/' . $row['filename'] . '" width="100" height="100" alt="Afbeelding"><br>' . PHP_EOL;
+                    echo '<img src="Images/' . $row['filename'] . '" width="100" height="100" alt="Afbeelding"><br>' . PHP_EOL;
                     break;
                 case "details":
-                    echo '<img src="../Images/' . $row['filename'] . '" width="300" height="300" alt="Afbeelding"><br>' . PHP_EOL;
+                    echo '<img src="Images/' . $row['filename'] . '" width="300" height="300" alt="Afbeelding"><br>' . PHP_EOL;
                     break;
             }
             echo    '<h3>' . $row['name'] . '</h3>' . PHP_EOL;

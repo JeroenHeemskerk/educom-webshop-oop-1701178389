@@ -9,25 +9,32 @@ class BasicDoc extends HtmlDoc
         $this->data = $myData;
     }
     private function showTitle() {echo '<title>' . $this->data['page'] . '</title>';}
-    private function showCssLinks() {echo' <link rel="stylesheet" href="../CSS/stylesheet.css">';}
-    private function showHeader() {echo '<header><h1>Hier moet de page komen vanuit data</h1></header>';}
-    private function showMenu() {echo 'Ik weet nog niet hoe het menu moet.<br>';}
-    /*{
+    private function showCssLinks() {echo' <link rel="stylesheet" href="CSS/stylesheet.css">';}
+    private function showHeaderStart() {echo '<header><h1>';}
+    protected function showHeader() {echo 'moet overriden worden';}
+    private function showHeaderEnd() {echo '</h1></header>';}
+    private function showMenu()
+    {
         echo '<nav>' . PHP_EOL;                
-        showNavList ();
+        $this -> showNavList ();
         echo '</nav>' . PHP_EOL;
     }
-    
     private function showNavList()
     {
         echo    '<ul class="menu">' . PHP_EOL;
-        foreach ($data['menu'] as $link => $label)
+        foreach ($this -> data['menu'] as $link => $label)
         {
-            showNavItem($link, $label);
+            $this -> showNavItem($link, $label);
         }
         echo    '</ul>' . PHP_EOL;
-    }*/
-    //protected function showContent();
+    }
+    private function showNavItem($link, $label) 
+    {
+        echo '<li><a class="navigateMenu" href="index_db.php?page=' . $link . '">' . $label . '</a></li>';
+    } 
+
+
+    protected function showContent() {echo 'dit moet overriden worden';}
     private function showFooter() {echo '<footer><p>&copy; 2023 Nicole Goris</p></footer>';}
 
     protected function showHeadContent() 
@@ -38,7 +45,9 @@ class BasicDoc extends HtmlDoc
  
     protected function showBodyContent() 
     {
+        $this -> showHeaderStart();
         $this -> showHeader();
+        $this -> showHeaderEnd();
         $this -> showMenu();
         $this -> showContent();
         $this -> showFooter();

@@ -1,8 +1,6 @@
 <?php
 require_once "BasicDoc.php";
 
-$data = array("page" =>"basic");
-
 class AboutDoc extends BasicDoc {
     protected function showContent() {echo"<p class='blok'>Ik ben acht jaar onderwijzer geweest en ben nu bezig met mijn nieuwe uitdaging. 
         Op 7 november 2023 ben ik begonnen met het traineeship Apllication/Software development
