@@ -12,13 +12,12 @@ class BasicDoc extends HtmlDoc
     private function showCssLinks() {echo' <link rel="stylesheet" href="../CSS/stylesheet.css">';}
     private function showHeader() {echo '<header><h1>Hier moet de page komen vanuit data</h1></header>';}
     private function showMenu() {echo 'Ik weet nog niet hoe het menu moet.<br>';}
-    protected function showContent() 
-    {
+    /*{
         echo '<nav>' . PHP_EOL;                
         showNavList ();
         echo '</nav>' . PHP_EOL;
     }
-
+    
     private function showNavList()
     {
         echo    '<ul class="menu">' . PHP_EOL;
@@ -27,8 +26,8 @@ class BasicDoc extends HtmlDoc
             showNavItem($link, $label);
         }
         echo    '</ul>' . PHP_EOL;
-    }
-
+    }*/
+    //protected function showContent();
     private function showFooter() {echo '<footer><p>&copy; 2023 Nicole Goris</p></footer>';}
 
     protected function showHeadContent() 

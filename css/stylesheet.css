@@ -99,6 +99,10 @@ input, select, textarea {
     color: red;
 }
 
+img{
+    border: 2px dotted rgb(46,72,199);
+}
+
 .evenItem, .oddItem {
     color: rgb(46, 72, 119);
     padding: 10px;
