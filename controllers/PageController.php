@@ -26,16 +26,16 @@ class PageController
         {
             case "contact":
                 $this -> model = new UserModel($this -> model);
-                $model -> validateContact();
-                if ($model ->valid) 
+                $this -> model -> validateContact();
+                if ($this -> model ->valid) 
                 {
                     $this -> model -> setPage("thanks");
                 }
                 break;
             case "register":
                 $this -> model = new UserModel($this -> model);
-                $model -> validateRegister();
-                if ($model ->valid) 
+                $this -> model -> validateRegister();
+                if ($this -> model ->valid) 
                 {
                     $this -> model -> storeUser();
                     $this -> model -> setPage("login");
@@ -43,8 +43,8 @@ class PageController
                 break;  
             case "login":
                 $this -> model = new UserModel($this -> model);
-                $model -> validateLogin();
-                if ($model ->valid) 
+                $this -> model -> validateLogin();
+                if ($this -> model ->valid) 
                 {
                     $this -> model -> doLoginUser();
                     $this -> model -> setPage("home");
@@ -57,8 +57,8 @@ class PageController
                 break;
             case "password":
                 $this -> model = new UserModel($this -> model);
-                $model -> validatePassword();
-                if ($model ->valid) 
+                $this -> model -> validatePassword();
+                if ($this -> model ->valid) 
                 {
                     $this -> model -> updatePassword();
                     $this -> model -> setPage("confirmed");

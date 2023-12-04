@@ -29,12 +29,12 @@ class BasicDoc extends HtmlDoc
             $this -> showNavItem($link, $label);
         }
         echo    '</ul>' . PHP_EOL;
-    }
-    private function showNavItem($link, $label) 
-    {
-        echo '<li><a class="navigateMenu" href="index_db.php?page=' . $link . '">' . $label . '</a></li>';
     } 
 
+    private function showNavItem($link, $label) 
+    {
+        echo '<li><a class="navigateMenu" href="index.php?page=' . $link . '">' . $label . '</a></li>';
+    }
 
     protected function showContent() {echo 'dit moet overriden worden';}
     private function showFooter() {echo '<br><footer><p>&copy; 2023 Nicole Goris</p></footer>';}
