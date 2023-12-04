@@ -3,12 +3,12 @@ require_once "HtmlDoc.php";
 
 class BasicDoc extends HtmlDoc 
 {
-    protected $data;
-    public function __construct($myData) 
+    protected $model;
+    public function __construct($model) 
     {
-        $this->data = $myData;
+        $this -> model = $model;
     }
-    private function showTitle() {echo '<title>' . $this->data['page'] . '</title>';}
+    private function showTitle() {echo '<title>' . $this -> model -> page . '</title>';}
     private function showCssLinks() {echo' <link rel="stylesheet" href="CSS/stylesheet.css">';}
 
     private function showHeaderStart() {echo '<header><h1>';}
@@ -24,7 +24,7 @@ class BasicDoc extends HtmlDoc
     private function showNavList()
     {
         echo    '<ul class="menu">' . PHP_EOL;
-        foreach ($this -> data['menu'] as $link => $label)
+        foreach ($this -> model -> menu as $link => $label)
         {
             $this -> showNavItem($link, $label);
         }
