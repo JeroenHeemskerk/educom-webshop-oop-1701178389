@@ -63,35 +63,6 @@ class PageController
                     $this -> model -> setPage("confirmed");
                 }  
                 break;
-            //Ik weet niet hoe de rest ingericht moeten worden, omdat we bovenstaand al handle actions hebben ingevoegd. 
-            /*case "shop":
-                    handleActions();
-                    $requested_type = $_SERVER['REQUEST_METHOD'];
-                    if ($requested_type == 'POST') {
-                        $id = getPostvar('id');
-                    } else {
-                        $id = getUrlvar('id');
-                    }
-                    require_once('file_repository.php');
-                    $data['item'] = getItemDetails ($id);
-                    break;
-            case "details":      
-                    handleActions();
-                    $requested_type = $_SERVER['REQUEST_METHOD'];
-                    if ($requested_type == 'POST') {
-                        $id = getPostvar('id');
-                    } else {
-                        $id = getUrlvar('id');
-                    }
-                    require_once('file_repository.php');
-                    $data['item'] = getItemDetails ($id);
-                break;
-            case "cart":
-                handleActions();
-                break;
-            case "succeed":
-                handleActions($_SESSION['cart']);   
-                break;*/
         }
     }
 

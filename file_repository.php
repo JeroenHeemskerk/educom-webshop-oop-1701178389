@@ -144,20 +144,39 @@ function getShopItems ()
     $dbInfo = startDatabase();
     //declareVariables
     $conn = $dbInfo['conn'];
- try {
-    $sql = "SELECT * FROM item";
-    $results = mysqli_query($conn, $sql);
-    $item = array();
-    while ($row = mysqli_fetch_array($results)) {
-        $item[$row['id']] = $row;
+ try{
+    $sql =  "SELECT id 
+            FROM item";
+    $result = mysqli_query($conn, $sql);
+    $items = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $itemId = $row['id']; 
+        $itemInfo = getItemDetails($itemId);
+        $items[] = $itemInfo;
     }
-    return $item;
+    return $items;
  } finally {
-     mysqli_close($conn);
+    mysqli_close($conn);
  }
 }
 
 //Details
+function getDetails ($itemId)
+{
+    $dbInfo = startDatabase();
+    //declareVariables
+    $conn = $dbInfo['conn'];
+ try {
+    $sql = "SELECT * FROM item WHERE id = '$itemId'";
+    $results = mysqli_query($conn, $sql);
+    $items = mysqli_fetch_array($results, MYSQLI_ASSOC);
+    return $items;
+ } finally {
+    mysqli_close($conn);
+ }
+}
+
+//Dit hoort bij Top 5
 function getItemDetails ($itemId)
 {
     $dbInfo = startDatabase();
@@ -166,8 +185,8 @@ function getItemDetails ($itemId)
  try {
     $sql = "SELECT * FROM item WHERE id = '$itemId'";
     $results = mysqli_query($conn, $sql);
-    $itemDetails = mysqli_fetch_array($results);
-    return $itemDetails;
+    $row = mysqli_fetch_assoc($results);
+    return $row;
  } finally {
     mysqli_close($conn);
  }
@@ -213,13 +232,13 @@ function getTop5()
             ORDER BY SUM(quantity) DESC 
             LIMIT 5";
     $result = mysqli_query($conn, $sql);
-    $top5 = array();
+    $items = array();
     while ($row = mysqli_fetch_assoc($result)) {
         $itemId = $row['item_id']; 
         $itemInfo = getItemDetails($itemId);
-        $top5[] = $itemInfo;
+        $items[] = $itemInfo;
     }
-    return $top5;
+    return $items;
  } finally {
     mysqli_close($conn);
  }

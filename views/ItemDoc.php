@@ -7,10 +7,13 @@ abstract class ItemDoc extends BasicDoc {
     {       
         $counter = 0;
         $topNumber = 1;
+        if (!is_array($items) || !isset($items[0])) {
+            $items = array($items);
+        }
         foreach ($items as $row) {
             $commaPrice = number_format($row['price'], 2, ',', '.');
             $itemClass = ($counter % 2 == 0) ? 'evenItem' : 'oddItem';           
-            echo    '<a class="item" href="index.php?page=details&id=' . $row['id'] . '"><div class="' . $itemClass . '">' . PHP_EOL;
+            echo    '<a class="item" href="index_db.php?page=details&id=' . $row['id'] . '"><div class="' . $itemClass . '">' . PHP_EOL;
             switch($page)
             {
                 case "shop": 
@@ -29,7 +32,7 @@ abstract class ItemDoc extends BasicDoc {
             switch($page)
             {
                 case "details":
-                    $row['description'];
+                    echo '' . $row['description'] . '<br><br>' . PHP_EOL;
                     break;
                 default:
                     break;
@@ -38,15 +41,15 @@ abstract class ItemDoc extends BasicDoc {
                     '<br><br>' . PHP_EOL; 
             $counter++;
             $topNumber++;
-            //require_once('session_manager.php'); 
-            //if (!empty(isUserLoggedIn())) {
+            require_once('session_manager.php'); 
+            if (!empty(isUserLoggedIn())) {
                 echo '  <form action="index_db.php" method="post">
                 <input type="hidden" name="page" value="' . $page . '">
                 <input type="hidden" name="id" value="' . $row['id'] . '">
                 <input type="hidden" name="action" value="storeItemInSession">
                 <input class="cartButton "type="submit" value="Voeg toe aan winkelwagentje"><br>
                 </form>';
-                //}
+                }
                 echo    '</div></a>';
             }
     }

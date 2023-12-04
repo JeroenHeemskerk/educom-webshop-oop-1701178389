@@ -1,7 +1,7 @@
 <?php
-require_once "../views/ItemDoc.php";
+require_once "ItemDoc.php";
 
-class DetailDoc extends ItemDoc {
+class DetailsDoc extends ItemDoc {
     protected function showHeader()
     {
         echo 'Details';

@@ -7,7 +7,7 @@ showResponsePage($data);
 function getRequestedPage () 
 {
     $requested_type = $_SERVER['REQUEST_METHOD'];
-    if ($requested_type == 'POST')
+    if ($requested_type == 'POST') 
     {
         $requested_page = getPostVar('page', 'home');
     }
@@ -63,14 +63,8 @@ function processRequest($page)
             break;
         case "shop":
                 handleActions();
-                $requested_type = $_SERVER['REQUEST_METHOD'];
-                if ($requested_type == 'POST') {
-                    $id = getPostvar('id');
-                } else {
-                    $id = getUrlvar('id');
-                }
                 require_once('file_repository.php');
-                $data['items'] = getItemDetails ($id);
+                $data['items'] = getShopItems ();
                 break;
         case "top5":
                 handleActions();
@@ -79,14 +73,9 @@ function processRequest($page)
                 break;
         case "details":      
                 handleActions();
-                $requested_type = $_SERVER['REQUEST_METHOD'];
-                if ($requested_type == 'POST') {
-                    $id = getPostvar('id');
-                } else {
-                    $id = getUrlvar('id');
-                }
+                $itemId = getUrlVar('id');
                 require_once('file_repository.php');
-                $data['item'] = getItemDetails ($id);
+                $data['items'] = getDetails ($itemId);
             break;
         case "cart":
             handleActions();
