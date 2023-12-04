@@ -3,11 +3,11 @@ require_once "BasicDoc.php";
 
 abstract class ItemDoc extends BasicDoc {
     private function getItemFromDb() {echo 'database blijven we nog even af'; }
-    protected function showItem($page, $item) 
+    protected function showItem($page, $items) 
     {       
         $counter = 0;
         $topNumber = 1;
-        foreach ($item as $row) {
+        foreach ($items as $row) {
             $commaPrice = number_format($row['price'], 2, ',', '.');
             $itemClass = ($counter % 2 == 0) ? 'evenItem' : 'oddItem';           
             echo    '<a class="item" href="index.php?page=details&id=' . $row['id'] . '"><div class="' . $itemClass . '">' . PHP_EOL;

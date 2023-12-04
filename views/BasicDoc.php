@@ -35,7 +35,7 @@ class BasicDoc extends HtmlDoc
 
 
     protected function showContent() {echo 'dit moet overriden worden';}
-    private function showFooter() {echo '<footer><p>&copy; 2023 Nicole Goris</p></footer>';}
+    private function showFooter() {echo '<br><footer><p>&copy; 2023 Nicole Goris</p></footer>';}
 
     protected function showHeadContent() 
     {

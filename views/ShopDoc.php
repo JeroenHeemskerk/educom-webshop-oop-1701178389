@@ -11,5 +11,4 @@ class ShopDoc extends ItemDoc {
         $this->showItem("shop", $this -> data['items']);
     }
 }
-
 ?> 
