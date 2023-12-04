@@ -195,7 +195,7 @@ function validateLoginData($data)
 function validatePassword () 
 {
     // declareVariables
-    $data = array("password"=>"", "newpassword"=>"", "passwordRep"=>"", "passwordErr"=>"", "newpasswordErr"=>"", "passwordRepErr"=>"", "valid" => false, "userId" => $_SESSION["userId"]);
+    $data = array("oldPassword"=>"", "password"=>"", "passwordRep"=>"", "oldPasswordErr"=>"", "passwordErr"=>"", "passwordRepErr"=>"", "valid" => false, "userId" => $_SESSION["userId"]);
     //varifyRequest
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
@@ -208,22 +208,22 @@ function validatePassword ()
 
 function validatePasswordData($data)
 {
-    if (empty($data['password'])) {
-        $data['passwordErr'] = "Oude wachtwoord is verplicht";
+    if (empty($data['oldPassword'])) {
+        $data['oldPasswordErr'] = "Oude wachtwoord is verplicht";
     } else {
             require_once('file_repository.php');
             $data = checkPassword($data);
         }
-    if (empty($data['newpassword'])) {
-        $data['newpasswordErr'] = "Nieuw wachtwoord is verplicht";
+    if (empty($data['password'])) {
+        $data['passwordErr'] = "Nieuw wachtwoord is verplicht";
     }
     if (empty($data['passwordRep'])) {
         $data['passwordRepErr'] = "Wachtwoord herhalen is verplicht";
     }
-    if (($data['newpassword']) != ($data['passwordRep'])) {
-        $data['passwordRepErr'] = $data['newpasswordErr']= "Wachtwoorden komen niet overeen";
+    if (($data['password']) != ($data['passwordRep'])) {
+        $data['passwordRepErr'] = $data['passwordErr']= "Wachtwoorden komen niet overeen";
     }
-    if (empty($data['passwordErr']) && empty($data['newpasswordErr']) && empty($data['passwordRepErr']))
+    if (empty($data['oldPasswordErr']) && empty($data['passwordErr']) && empty($data['passwordRepErr']))
     {
         $data = updatePassword ($data);
     }

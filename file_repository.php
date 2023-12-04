@@ -92,14 +92,14 @@ function checkPassword($data)
     $conn = $dbInfo['conn'];
  try {
     $userId = $data['userId'];
-    $entered_password = $data['password'];
+    $entered_password = $data['oldPassword'];
     $sql = "SELECT password FROM users WHERE id = '$userId'";
     $result = mysqli_query($conn, $sql);
     if ($result && $row = mysqli_fetch_array($result)) {
         if (password_verify($entered_password, $row['password'])) {
-            $data['passwordErr'] ="";
+            $data['oldPasswordErr'] ="";
         } else {
-            $data['passwordErr'] = 'Uw oude wachtwoord is onjuist';
+            $data['oldPasswordErr'] = 'Uw oude wachtwoord is onjuist';
         }
         return $data;
     }
@@ -115,8 +115,8 @@ function updatePassword($data)
     $conn = $dbInfo['conn'];
  try{
     $userId = $_SESSION['userId'];
-    $oldPassword = $data['password'];
-    $newPassword = $data['newpassword'];
+    $oldPassword = $data['oldPassword'];
+    $newPassword = $data['password'];
     $escapedPassword = mysqli_real_escape_string($conn, $newPassword);
     $checkOldPasswordQuery = "SELECT id, password FROM users WHERE id = '$userId'";
     $result = mysqli_query($conn, $checkOldPasswordQuery);
