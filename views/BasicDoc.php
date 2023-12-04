@@ -10,9 +10,11 @@ class BasicDoc extends HtmlDoc
     }
     private function showTitle() {echo '<title>' . $this->data['page'] . '</title>';}
     private function showCssLinks() {echo' <link rel="stylesheet" href="CSS/stylesheet.css">';}
+
     private function showHeaderStart() {echo '<header><h1>';}
     protected function showHeader() {echo 'moet overriden worden';}
     private function showHeaderEnd() {echo '</h1></header>';}
+
     private function showMenu()
     {
         echo '<nav>' . PHP_EOL;                

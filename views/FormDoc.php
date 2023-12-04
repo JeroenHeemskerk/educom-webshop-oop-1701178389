@@ -2,10 +2,10 @@
 require_once "BasicDoc.php";
 
  abstract class FormDoc extends BasicDoc {
-    protected function showOpenForm() {echo '<form action="index.php" method="POST"><div class="invoervelden">';}
+    protected function showOpenForm() {echo '<form action="index_db.php" method="POST"><div class="invoervelden">';}
     protected function showCloseForm() {echo '</div></form>';}
 
-    protected function showFormField($fieldName, $label, $type, $placeholder='', $options=NULL, $rows='', $cols='', $labels='' )
+    protected function showFormField($fieldName, $label, $type, $placeholder='', $options=NULL, $rows='', $cols='', $labels='')
     {
         $currentValue = $this->data[$fieldName];
         echo '<div><label for=' . $fieldName . '>' . $label . ' </label>';

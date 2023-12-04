@@ -23,12 +23,12 @@ function showContactForm ($data)
                 <label for="email">E-mailadres:</label>
                     <input class="sw" type="text" id="email" name="email" placeholder="Typ hier uw e-mailadres" value="' . $data['email'] . '" > 
                     <span class="error">' . $data['emailErr'] . '</span><br>
-                <label for="phone">Telefoonnummer:</label>
-                    <input class="sw" type="text" id="phone" name="phone" placeholder="Typ hier uw telefoonnummer" value="' . $data['phone'] . '">
-                    <span class="error">' . $data['phoneErr'] . '</span><br>
-                <label for="street">Straatnaam</label>
-                    <input class="sw" type="text" id="street" name="street" placeholder="Typ hier uw straat" value="' . $data['street'] . '"> 
-                    <span class="error">' . $data['streetErr'] . '</span><br>
+                <label for="tel">Telefoonnummer:</label>
+                    <input class="sw" type="text" id="tel" name="tel" placeholder="Typ hier uw telefoonnummer" value="' . $data['tel'] . '">
+                    <span class="error">' . $data['telErr'] . '</span><br>
+                <label for="str">Straatnaam</label>
+                    <input class="sw" type="text" id="str" name="str" placeholder="Typ hier uw straat" value="' . $data['str'] . '"> 
+                    <span class="error">' . $data['strErr'] . '</span><br>
                 <label for="strnr">Huisnummer</label>
                     <input class="sw" type="text" id="strnr" name="strnr" placeholder="Typ hier uw huisnummer" value="' . $data['strnr'] . '">
                     <span class="error">' . $data['strnrErr'] . '</span><br>
@@ -44,8 +44,8 @@ function showContactForm ($data)
             Kies uw communicatievoorkeur:<span class="error">' . $data['comErr'] . '</span><br>
                 <input type="radio" id="com_email" name="com" value="E-mail"' . ($data['com'] =="E-mail" ? 'checked = "checked"' : '') . '>
                     <label for="com_email">E-mail</label><br>
-                <input type="radio" id="phone" name="com" value="Phone"' . ($data['com'] =="Phone" ? 'checked = "checked"' : ' ') . '>
-                    <label for="phone">Telefoon</label><br>
+                <input type="radio" id="tel" name="com" value="tel"' . ($data['com'] =="tel" ? 'checked = "checked"' : ' ') . '>
+                    <label for="tel">Telefoon</label><br>
                 <input type="radio" id="mail" name="com" value="Mail"' . ($data['com'] =="Mail" ? 'checked = "checked"' : ' ') . '>
                     <label for="mail">Post</label><br>
                 <br>

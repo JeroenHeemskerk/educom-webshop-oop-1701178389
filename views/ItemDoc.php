@@ -40,7 +40,7 @@ abstract class ItemDoc extends BasicDoc {
             $topNumber++;
             //require_once('session_manager.php'); 
             //if (!empty(isUserLoggedIn())) {
-                echo '  <form action="index.php" method="post">
+                echo '  <form action="index_db.php" method="post">
                 <input type="hidden" name="page" value="' . $page . '">
                 <input type="hidden" name="id" value="' . $row['id'] . '">
                 <input type="hidden" name="action" value="storeItemInSession">
@@ -52,5 +52,4 @@ abstract class ItemDoc extends BasicDoc {
     }
 }
 
-?> 
-<?php
+?>

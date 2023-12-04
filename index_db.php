@@ -70,7 +70,7 @@ function processRequest($page)
                     $id = getUrlvar('id');
                 }
                 require_once('file_repository.php');
-                $data['item'] = getItemDetails ($id);
+                $data['items'] = getItemDetails ($id);
                 break;
         case "top5":
                 handleActions();

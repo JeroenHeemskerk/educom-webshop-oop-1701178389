@@ -12,8 +12,8 @@ function showThanksContent ($data)
     echo 'Aanhef: ' . $data['salut'] . '<br>';
     echo 'Naam: ' . $data['name'] . '<br>';
     echo 'E-mailadres: ' . $data['email'] . '<br>';
-    echo 'Telefoonnummer: ' . $data['phone'] . '<br>';
-    echo 'Straatnaam: ' . $data['street'] . '<br>';
+    echo 'Telefoonnummer: ' . $data['tel'] . '<br>';
+    echo 'Straatnaam: ' . $data['str'] . '<br>';
     echo 'Huisnummer: ' . $data['strnr'] . '<br>';
     echo 'Postcode: ' . $data['zpcd'] . '<br>';
     echo 'Woonplaats: ' . $data['resid'] . '<br>';

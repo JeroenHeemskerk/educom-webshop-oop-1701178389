@@ -4,7 +4,7 @@
 function validateContact()
 {
     // declareVariables
-    $data = array("salut"=>"", "name"=>"", "com"=>"", "email"=>"", "phone"=>"", "street"=>"", "strnr"=>"", "zpcd"=>"", "resid"=>"", "message"=>"", "salutErr"=>"", "nameErr"=>"", "comErr"=>"", "emailErr"=>"", "phoneErr"=>"", "streetErr"=>"", "strnrErr"=>"", "zpcdErr"=>"", "residErr"=>"", "messageErr"=>"", "valid" => false); 
+    $data = array("salut"=>"", "name"=>"", "com"=>"", "email"=>"", "tel"=>"", "str"=>"", "strnr"=>"", "zpcd"=>"", "resid"=>"", "message"=>"", "salutErr"=>"", "nameErr"=>"", "comErr"=>"", "emailErr"=>"", "telErr"=>"", "strErr"=>"", "strnrErr"=>"", "zpcdErr"=>"", "residErr"=>"", "messageErr"=>"", "valid" => false); 
     
     //varifyRequest
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -54,24 +54,24 @@ function validateContactData($data)
                 $data['emailErr'] = "Dit e-mailadres lijkt niet te kloppen";}
         }        
     }    
-    if ($data['com'] =="Phone") {                                     
-        if (empty($data['phone'])) {
-            $data['phoneErr'] = "Telefoonnummer is verplicht";
+    if ($data['com'] =="tel") {                                     
+        if (empty($data['tel'])) {
+            $data['telErr'] = "Telefoonnummer is verplicht";
         }
         else {
-            if (!preg_match('/^[0-9 -+]+$/', $data['phone'])) { 
-                $data['phoneErr'] = "Dit lijkt geen goed telefoonnummer";} 
+            if (!preg_match('/^[0-9 -+]+$/', $data['tel'])) { 
+                $data['telErr'] = "Dit lijkt geen goed telefoonnummer";} 
             }        
     }       
     
     $adressIncomplete = false;
-    $adressIncomplete = !empty($data['street']) || !empty($data['strnr']) || !empty($data['zpcd']) || !empty($data['resid']);                             
-    if (empty($data['street'])) { 
+    $adressIncomplete = !empty($data['str']) || !empty($data['strnr']) || !empty($data['zpcd']) || !empty($data['resid']);                             
+    if (empty($data['str'])) { 
         if ($data['com'] =='Mail') {                 
-            $data['streetErr'] = "Staatnaam is verplicht"; 
+            $data['strErr'] = "Staatnaam is verplicht"; 
         }
         else if ($adressIncomplete) {
-            $data['streetErr'] = "Uw adresgegevens zijn onvolledig";
+            $data['strErr'] = "Uw adresgegevens zijn onvolledig";
         }
     }
     if (empty($data['strnr'])) {
@@ -98,7 +98,7 @@ function validateContactData($data)
             $data['residErr'] = "Uw adresgegevens zijn onvolledig";
         }
     }
-    if (empty($data['salutErr']) && empty($data['nameErr']) && empty($data['comErr']) && empty($data['emailErr']) && empty($data['phoneErr']) && empty($data['streetErr']) && empty($data['strnrErr']) && empty($data['zpcdErr']) && empty($data['residErr']) && empty($data['messageErr']))
+    if (empty($data['salutErr']) && empty($data['nameErr']) && empty($data['comErr']) && empty($data['emailErr']) && empty($data['telErr']) && empty($data['strErr']) && empty($data['strnrErr']) && empty($data['zpcdErr']) && empty($data['residErr']) && empty($data['messageErr']))
     {
         $data['valid'] = true;
     }
@@ -109,7 +109,7 @@ function validateContactData($data)
 function validateRegister()
 {
     // declareVariables
-    $data = array("name"=>"","email"=>"", "password"=>"", "passwordrep"=>"", "nameErr"=>"","emailErr"=>"", "passwordErr"=>"", "passwordrepErr"=>"", "valid" => false); 
+    $data = array("name"=>"","email"=>"", "password"=>"", "passwordRep"=>"", "nameErr"=>"","emailErr"=>"", "passwordErr"=>"", "passwordRepErr"=>"", "valid" => false); 
     
     //varifyRequest
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -144,13 +144,13 @@ function validateRegisterData($data)
     if (empty($data['password'])) {
         $data['passwordErr'] = "Wachtwoord is verplicht";
     }
-    if (empty($data['passwordrep'])) {
-        $data['passwordrepErr'] = "Wachtwoord herhalen is verplicht";
+    if (empty($data['passwordRep'])) {
+        $data['passwordRepErr'] = "Wachtwoord herhalen is verplicht";
     }
-    if (($data['password']) != ($data['passwordrep'])) {
-                $data['passwordrepErr'] = $data['passwordErr']= "Wachtwoorden komen niet overeen";
+    if (($data['password']) != ($data['passwordRep'])) {
+                $data['passwordRepErr'] = $data['passwordErr']= "Wachtwoorden komen niet overeen";
     }
-    if (empty($data['nameErr']) && empty($data['emailErr']) && empty($data['passwordErr']) && empty($data['passwordrepErr']))
+    if (empty($data['nameErr']) && empty($data['emailErr']) && empty($data['passwordErr']) && empty($data['passwordRepErr']))
     {
         $data['valid'] = true;
     }
@@ -195,7 +195,7 @@ function validateLoginData($data)
 function validatePassword () 
 {
     // declareVariables
-    $data = array("password"=>"", "newpassword"=>"", "passwordrep"=>"", "passwordErr"=>"", "newpasswordErr"=>"", "passwordrepErr"=>"", "valid" => false, "userId" => $_SESSION["userId"]);
+    $data = array("password"=>"", "newpassword"=>"", "passwordRep"=>"", "passwordErr"=>"", "newpasswordErr"=>"", "passwordRepErr"=>"", "valid" => false, "userId" => $_SESSION["userId"]);
     //varifyRequest
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
@@ -217,13 +217,13 @@ function validatePasswordData($data)
     if (empty($data['newpassword'])) {
         $data['newpasswordErr'] = "Nieuw wachtwoord is verplicht";
     }
-    if (empty($data['passwordrep'])) {
-        $data['passwordrepErr'] = "Wachtwoord herhalen is verplicht";
+    if (empty($data['passwordRep'])) {
+        $data['passwordRepErr'] = "Wachtwoord herhalen is verplicht";
     }
-    if (($data['newpassword']) != ($data['passwordrep'])) {
-        $data['passwordrepErr'] = $data['newpasswordErr']= "Wachtwoorden komen niet overeen";
+    if (($data['newpassword']) != ($data['passwordRep'])) {
+        $data['passwordRepErr'] = $data['newpasswordErr']= "Wachtwoorden komen niet overeen";
     }
-    if (empty($data['passwordErr']) && empty($data['newpasswordErr']) && empty($data['passwordrepErr']))
+    if (empty($data['passwordErr']) && empty($data['newpasswordErr']) && empty($data['passwordRepErr']))
     {
         $data = updatePassword ($data);
     }
