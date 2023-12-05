@@ -3,6 +3,7 @@ define("RESULT_OK", 0);
 define("RESULT_UNKNOWN_USER", -1);
 define("RESULT_WRONG_PASSWORD", -2);
 define("RESULT_USER_ALREADY_EXIST", -3);
+define("RESULT_REGISTER_OK", -4);
 
 function startDatabase() {
     $servername = "localhost";
@@ -21,13 +22,12 @@ function startDatabase() {
 }
 
 //Bij register
-function checkUserExist($data) {
+function checkUserExist($email) {
    
     $dbInfo = startDatabase();
     //declareVariables
     $conn = $dbInfo['conn'];
  try {
-    $email = $data['email'];
     $email = mysqli_real_escape_string($conn, $email);
     $sql = "SELECT name FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $sql);
@@ -36,7 +36,7 @@ function checkUserExist($data) {
             return array('result' => RESULT_USER_ALREADY_EXIST);
             break;     
         }
-    }
+    } else return array('result' => RESULT_REGISTER_OK);
  }
  finally {
     mysqli_close($conn);    

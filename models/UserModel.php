@@ -155,6 +155,7 @@ class UserModel extends PageModel
                 }
             }
             if (empty($this -> email)) {
+                $this -> emailErr = "E-mailadres is verplicht";
             }   else { 
                     require_once ('file_repository.php');                        
                     $userData = checkUserExist($this -> email); 
@@ -162,6 +163,8 @@ class UserModel extends PageModel
                         case RESULT_USER_ALREADY_EXIST:
                             $this -> emailErr = "Dit e-mailadres is al in gebruik";
                             break;
+                        case RESULT_REGISTER_OK:
+                            break;                        
                     }
                     if (empty($this -> emailErr)) {
                         if (!filter_var($this -> email, FILTER_VALIDATE_EMAIL)) {
@@ -183,6 +186,12 @@ class UserModel extends PageModel
                 $this -> valid = true;
             }
         }
+    }
+    //Succesvolle registratie
+    public function storeUser()
+    {
+        require_once('file_repository.php');
+        storeUser($this -> email, $this -> name, $this -> password);
     }
 
     //Inloggen valideren
