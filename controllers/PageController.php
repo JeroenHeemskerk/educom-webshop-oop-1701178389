@@ -25,40 +25,45 @@ class PageController
         switch ($this -> model -> page)
         {
             case "contact":
+                require_once("models/UserModel.php");
                 $this -> model = new UserModel($this -> model);
                 $this -> model -> validateContact();
-                if ($this -> model ->valid) 
+                if ($this -> model -> valid) 
                 {
                     $this -> model -> setPage("thanks");
                 }
                 break;
             case "register":
+                require_once("models/UserModel.php");
                 $this -> model = new UserModel($this -> model);
                 $this -> model -> validateRegister();
-                if ($this -> model ->valid) 
+                if ($this -> model -> valid) 
                 {
                     $this -> model -> storeUser();
                     $this -> model -> setPage("login");
                 }
                 break;  
             case "login":
+                require_once("models/UserModel.php");
                 $this -> model = new UserModel($this -> model);
                 $this -> model -> validateLogin();
-                if ($this -> model ->valid) 
+                if ($this -> model -> valid) 
                 {
                     $this -> model -> doLoginUser();
                     $this -> model -> setPage("home");
                 }
                 break;
             case "logout":
+                require_once("models/UserModel.php");
                 $this -> model = new UserModel($this -> model);
                 $this -> model -> doLogoutUser();
                 $this -> model -> setPage("home");
                 break;
             case "password":
+                require_once("models/UserModel.php");
                 $this -> model = new UserModel($this -> model);
                 $this -> model -> validatePassword();
-                if ($this -> model ->valid) 
+                if ($this -> model -> valid) 
                 {
                     $this -> model -> updatePassword();
                     $this -> model -> setPage("confirmed");
@@ -81,6 +86,10 @@ class PageController
             case "about":
                 require_once("views/AboutDoc.php");
                 $view = new AboutDoc($this -> model);
+                break;
+            case "contact":
+                require_once("views/ContactDoc.php");
+                $view = new ContactDoc($this -> model);
                 break;
             default:
                 require_once("views/NotFoundDoc.php");

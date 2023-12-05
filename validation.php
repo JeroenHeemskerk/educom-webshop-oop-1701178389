@@ -45,15 +45,16 @@ function validateContactData($data)
     if (empty($data['com'])) {
         $data['comErr'] = "Communicatievoorkeur is verplicht"; 
     } 
-    if ($data['com'] =="E-mail") {
-        if (empty($data['email'])) {
+    if (empty($data['email'])) {
+        if ($data['com'] =="E-mail") { 
             $data['emailErr'] = "E-mailadres is verplicht";
         }
-        else {
-            if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $data['emailErr'] = "Dit e-mailadres lijkt niet te kloppen";}
-        }        
-    }    
+    } else {
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $data['emailErr'] = "Dit e-mailadres lijkt niet te kloppen";
+        }
+    }        
+    
     if ($data['com'] =="tel") {                                     
         if (empty($data['tel'])) {
             $data['telErr'] = "Telefoonnummer is verplicht";

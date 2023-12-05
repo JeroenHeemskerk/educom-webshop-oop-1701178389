@@ -1,5 +1,5 @@
 <?php
-class PageController
+class not_PageController
 {
     private $model;
     public function__construct()

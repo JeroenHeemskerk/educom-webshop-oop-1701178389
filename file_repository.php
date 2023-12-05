@@ -1,4 +1,7 @@
 <?php
+define("RESULT_OK", 0);
+define("RESULT_UNKNOWN_USER", -1);
+define("RESULT_WRONG_PASSWORD", -2);
 
 function startDatabase() {
     $servername = "localhost";
@@ -16,6 +19,7 @@ function startDatabase() {
     return array('conn' => $conn, 'servername' => $servername, 'username' => $username, 'password' => $password, 'dbname' => $dbname);
 }
 
+//Bij register
 function checkUserExist($data) {
    
     $dbInfo = startDatabase();
@@ -39,6 +43,7 @@ function checkUserExist($data) {
  }
 }
 
+//Na register
 function storeUser($email, $name, $password)
 {
     $dbInfo = startDatabase();
@@ -60,6 +65,7 @@ function storeUser($email, $name, $password)
  }
 }
 
+//Inloggen
 function checkUserLogin($data) {
     $dbInfo = startDatabase();
     $conn = $dbInfo['conn'];
@@ -70,21 +76,26 @@ function checkUserLogin($data) {
     $entered_password = $data['password'];
     $sql = "SELECT id, name, password FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $sql);
-    if ($result && $row = mysqli_fetch_assoc($result)) {
+    if ($result) {
+      if ($row = mysqli_fetch_assoc($result)) {
         if(password_verify($entered_password, $row['password'])) {
-            $data['valid'] = true;
-            $data['id'] = $row['id'];
-            $data['name'] = $row['name'];
+         return array ('result' => RESULT_OK, 'user' => $row);
         } else {
-            $data['emailErr'] = $data['passwordErr'] = 'Onjuiste combinatie';
-        }    
-    } 
+            return array('result' => RESULT_WRONG_PASSWORD);
+        }
+      } else {
+         return array ('result' => RESULT_UNKNOWN_USER);
+      }    
+    } else {
+      throw new Exception("check failed");
+    }
     return $data;
  } finally {
     mysqli_close($conn);    
  } 
 }
 
+//Wachtwoord wijzigen
 function checkPassword($data)
 {
     $dbInfo = startDatabase();
