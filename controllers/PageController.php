@@ -91,6 +91,14 @@ class PageController
                 require_once("views/ContactDoc.php");
                 $view = new ContactDoc($this -> model);
                 break;
+            case "register":
+                require_once("views/RegisterDoc.php");
+                $view = new RegisterDoc($this -> model);
+                break;
+            case "login":
+                require_once("views/LoginDoc.php");
+                $view = new LoginDoc($this -> model);
+                break;
             default:
                 require_once("views/NotFoundDoc.php");
                 $view = new NotFoundDoc($this -> model);

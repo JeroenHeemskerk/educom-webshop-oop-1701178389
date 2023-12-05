@@ -2,6 +2,7 @@
 define("RESULT_OK", 0);
 define("RESULT_UNKNOWN_USER", -1);
 define("RESULT_WRONG_PASSWORD", -2);
+define("RESULT_USER_ALREADY_EXIST", -3);
 
 function startDatabase() {
     $servername = "localhost";
@@ -32,11 +33,11 @@ function checkUserExist($data) {
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $data['emailErr'] = "Dit e-mailadres is al in gebruik";
+            return array('result' => RESULT_USER_ALREADY_EXIST);$data['emailErr'] = "Dit e-mailadres is al in gebruik";
             break;     
         }
     }
-    return $data;
+    
  }
  finally {
     mysqli_close($conn);    

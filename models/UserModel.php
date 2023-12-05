@@ -137,10 +137,52 @@ class UserModel extends PageModel
         }
     }
 
-    /*Register valideren
+    //Register valideren
     public function validateRegister()
     {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") 
+        {
+            $this -> getAndClean("name");
+            $this -> getAndClean("email");
+            $this -> getAndClean("password");
+            $this -> getAndClean("passwordRep");
 
+            if (empty($this -> name)) {
+                $this -> nameErr = "Naam is verplicht";
+            } else {
+                if (!preg_match("/^[a-zA-Z-' ]*$/",$this -> name)) {
+                    $this -> nameErr = "U kunt hier alleen letters invullen";
+                }
+            }
+            if (empty($this -> email)) {
+            }   else { 
+                    require_once ('file_repository.php');                        
+                    $userData = checkUserExist($this -> email); 
+                    switch($userData['result']) {
+                        case RESULT_USER_ALREADY_EXIST:
+                            $this -> emailErr = "Dit e-mailadres is al in gebruik";
+                            break;
+                    }
+                    if (empty($this -> emailErr)) {
+                        if (!filter_var($this -> email, FILTER_VALIDATE_EMAIL)) {
+                            $this -> emailErr = "Dit e-mailadres lijkt niet te kloppen"; 
+                        }
+                    } 
+                }               
+            if (empty($this -> password)) {
+                $this -> passwordErr = "Wachtwoord is verplicht";
+            }
+            if (empty($this -> passwordRep)) {
+                $this -> passwordRepErr = "Wachtwoord herhalen is verplicht";
+            }
+            if (($this -> password) != ($this -> passwordRep)) {
+                        $this -> passwordRepErr = $this -> passwordErr= "Wachtwoorden komen niet overeen";
+            }
+            if (empty($this -> nameErr) && empty($this -> emailErr) && empty($this -> passwordErr) && empty($this -> passwordRepErr))
+            {
+                $this -> valid = true;
+            }
+        }
     }
 
     //Inloggen valideren
@@ -150,6 +192,7 @@ class UserModel extends PageModel
         {   
             $this -> getAndClean("email");
             $this -> getAndClean("password");
+
             if (empty($this -> email)) {
                 $this -> emailErr = "E-mailadres is verplicht";
             }
@@ -163,7 +206,7 @@ class UserModel extends PageModel
             }                                                       
             else {
                 require_once('file_repository.php');
-                $userData = checkUserLogin($data);   
+                $userData = checkUserLogin($this -> email);   
                 switch($userData['result']) {
                     case RESULT_OK:
                         $this -> valid = true;
@@ -185,7 +228,7 @@ class UserModel extends PageModel
     public function validatePassword()
     {
 
-    }*/
+    }
 
 }
 
