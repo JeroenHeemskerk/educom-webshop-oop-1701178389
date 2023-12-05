@@ -95,7 +95,7 @@ class UserModel extends PageModel
                         $this -> telErr = "Dit lijkt geen goed telefoonnummer";
                 } 
             }       
-            var_dump($this -> com);
+            
             $adressIncomplete = false;
             $adressIncomplete = !empty($this -> str) || !empty($this -> strnr) || !empty($this -> zpcd) || !empty($this -> resid);                             
             if (empty($this -> str)) { 

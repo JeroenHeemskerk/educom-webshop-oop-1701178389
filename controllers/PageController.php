@@ -30,7 +30,7 @@ class PageController
                 $this -> model -> validateContact();
                 if ($this -> model -> valid) 
                 {
-                    $this -> model -> setPage("thanks");
+                    $this -> model -> setPage('thanks');
                 }
                 break;
             case "register":

@@ -32,7 +32,7 @@ class PageModel
         }
     }
 
-    protected function setPage($newPage)
+    public function setPage($newPage)
     {
         $this -> page = $newPage;
     }
