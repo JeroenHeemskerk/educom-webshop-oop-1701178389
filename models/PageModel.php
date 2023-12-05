@@ -37,14 +37,22 @@ class PageModel
         $this -> page = $newPage;
     }
 
-    protected function getPostVar($key, $default='')
+    public function getPostVar($key, $default='')
     {
-        return isset($_POST[$key]) ? $_POST[$key] : $default;
+        if (isset($_POST[$key]))
+        {
+            return $_POST[$key];
+        }
+        return $default;
     }
 
-    protected function getUrlVar($key, $default='')
+    public function getUrlVar($key, $default='')
     {
-        return isset($_GET[$key]) ? $_GET[$key] : $default;
+        if (isset($_GET[$key]))
+        { 
+            return $_GET[$key];
+        } 
+        return $default;
     }
 
     public function createMenu()

@@ -16,7 +16,7 @@ class ContactDoc extends FormDoc {
         $this->showFormField('zpcd', 'Postcode:', 'text', 'Vul hier uw postcode in');
         $this->showFormField('resid', 'Woonplaats:', 'text', 'Vul hier uw woonplaats in');
         $this->showFormField('com', 'Kies uw communicatievoorkeur:', 'radio', '', '', '', '', array('email'=>'E-mail', 'tel'=>'Telefoon', 'mail'=>'Post'));
-        $this->showFormField('message', 'Waarover wilt u contact opnemen?', 'textarea', 'Vul hier uw vraag in', '', '4', '53');
+        $this->showFormField('message', '<br>Waarover wilt u contact opnemen?', 'textarea', 'Vul hier uw vraag in', '', '4', '53');
     }
 
     protected function showContent() {

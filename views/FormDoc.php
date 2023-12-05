@@ -24,9 +24,10 @@ require_once "BasicDoc.php";
             case "radio":
                 echo '<br>';
                 foreach ($labels as $key => $value) {
-                    echo '<input type="' . $type . '" id="' . $key . '" name="' . $key . '" value="' . $value . '"' . ($currentValue == $key ? 'checked = "checked"' : '') . '>
-                        <label for="' . $key . '">' . $value . '</label><br>';
-                } echo '<br>';
+                    $optionId = $fieldName . "_" . $key;
+                    echo '<input type="' . $type . '" id="' . $optionId . '" name="' . $fieldName . '" value="' . $key . '"' . ($currentValue == $key ? ' checked = "checked"' : '') . '>
+                        <label for="' . $optionId . '">' . $value . '</label><br>';
+                }
                 break;
             default:
                 echo '<input class="inputField" type=' . $type . ' id="' . $fieldName . '" name="' . $fieldName . '" placeholder="' . $placeholder . '" value="' . $currentValue . '">' . PHP_EOL;

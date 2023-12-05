@@ -38,7 +38,7 @@ class UserModel extends PageModel
     //functie getAndClean maken
     private function getAndClean($key)
     {
-        $value = getPostVar($key);
+        $value = $this -> getPostVar($key);
         $value = trim($value);
         $value = stripslashes($value);
         $value = htmlspecialchars($value);
@@ -77,7 +77,7 @@ class UserModel extends PageModel
                 $this -> comErr = "Communicatievoorkeur is verplicht"; 
             } 
             if (empty($this -> email)) {
-                if ($this -> com =="E-mail") { 
+                if ($this -> com =="email") { 
                     $this -> emailErr = "E-mailadres is verplicht";
                 }
             } else {
@@ -92,13 +92,14 @@ class UserModel extends PageModel
                 }
             } else {
                 if (!preg_match('/^[0-9 -+]+$/', $this -> tel)) { 
-                        $this -> telErr = "Dit lijkt geen goed telefoonnummer";} 
-                }       
-            
+                        $this -> telErr = "Dit lijkt geen goed telefoonnummer";
+                } 
+            }       
+            var_dump($this -> com);
             $adressIncomplete = false;
-            $this -> adressIncomplete = !empty($this -> str) || !empty($this -> strnr) || !empty($this -> zpcd) || !empty($this -> resid);                             
+            $adressIncomplete = !empty($this -> str) || !empty($this -> strnr) || !empty($this -> zpcd) || !empty($this -> resid);                             
             if (empty($this -> str)) { 
-                if ($this -> com =='Mail') {                 
+                if ($this -> com =='mail') {                 
                     $this -> strErr = "Staatnaam is verplicht"; 
                 }
                 else if ($adressIncomplete) {
@@ -106,7 +107,7 @@ class UserModel extends PageModel
                 }
             }
             if (empty($this -> strnr)) {
-                if ($this -> com =='Mail') {
+                if ($this -> com =='mail') {
                     $this -> strnrErr = "Huisnummer is verplicht";
                 }
                 else if ($adressIncomplete) {
@@ -114,7 +115,7 @@ class UserModel extends PageModel
                 }
             }
             if (empty($this -> zpcd)) {
-                if ($this -> com =='Mail') {
+                if ($this -> com =='mail') {
                     $this -> zpcdErr = "Postcode is verplicht";
                 }
                 else if ($adressIncomplete) {
@@ -122,7 +123,7 @@ class UserModel extends PageModel
                 }
             } 
             if (empty($this -> resid)) {
-                if ($this -> com =='Mail') {
+                if ($this -> com =='mail') {
                     $this -> residErr = "Woonplaats is verplicht";
                 }
                 else if ($adressIncomplete) {
