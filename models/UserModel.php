@@ -206,7 +206,7 @@ class UserModel extends PageModel
             }                                                       
             else {
                 require_once('file_repository.php');
-                $userData = checkUserLogin($this -> email);   
+                $userData = checkUserLogin($this -> email, $this -> password);   
                 switch($userData['result']) {
                     case RESULT_OK:
                         $this -> valid = true;

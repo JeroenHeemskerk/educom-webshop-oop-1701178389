@@ -49,7 +49,7 @@ class PageController
                 $this -> model -> validateLogin();
                 if ($this -> model -> valid) 
                 {
-                    $this -> model -> doLoginUser();
+                    //$this -> model -> doLoginUser();
                     $this -> model -> setPage("home");
                 }
                 break;

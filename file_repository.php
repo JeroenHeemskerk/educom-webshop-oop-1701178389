@@ -33,11 +33,10 @@ function checkUserExist($data) {
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            return array('result' => RESULT_USER_ALREADY_EXIST);$data['emailErr'] = "Dit e-mailadres is al in gebruik";
+            return array('result' => RESULT_USER_ALREADY_EXIST);
             break;     
         }
     }
-    
  }
  finally {
     mysqli_close($conn);    
@@ -67,14 +66,13 @@ function storeUser($email, $name, $password)
 }
 
 //Inloggen
-function checkUserLogin($data) {
+function checkUserLogin($email, $password) {
     $dbInfo = startDatabase();
     $conn = $dbInfo['conn'];
  try {
     //declareVariables
-    $email = $data['email'];
     $email = mysqli_real_escape_string($conn, $email);
-    $entered_password = $data['password'];
+    $entered_password = $password;
     $sql = "SELECT id, name, password FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $sql);
     if ($result) {
