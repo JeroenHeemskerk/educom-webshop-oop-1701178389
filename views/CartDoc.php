@@ -21,7 +21,7 @@ class CartDoc extends ItemDoc {
                 $subtotal = $row['price'] * $quantity;
                 $commaSubtotal = number_format($subtotal, 2, ',', '.');
                 $shopItemClass = ($counter % 2 == 0) ? 'evenItem' : 'oddItem';
-                echo    '<a class="shopItemCart" href="index_db.php?page=details&id=' . $row['id'] . '">
+                echo    '<a class="shopItemCart" href="index.php?page=details&id=' . $row['id'] . '">
                         <div id="cartItems" class="' .$shopItemClass . '">
                         <table>
                         <td id="itemImg"><img src="Images/' . $row['filename'] . '" width="50" height="50" alt="Afbeelding"></td> 
@@ -39,7 +39,7 @@ class CartDoc extends ItemDoc {
             echo    '<div class="total">
                         <p>
                             <h3>Totaal: € ' . $commaTotal . '</h3>
-                            <form action="index_db.php" method="post">
+                            <form action="index.php" method="post">
                             <input type="hidden" name="page" value="succeed">
                             <input type="hidden" name="action" value="insertOrderInDb">
                             <input class="cartButton "type="submit" value="Afrekenen">

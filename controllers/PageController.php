@@ -68,6 +68,11 @@ class PageController
                     $this -> model -> updatePassword();
                     $this -> model -> setPage("confirmed");
                 }  
+            case "shop":
+                require_once("models/ShopModel.php");
+                $this -> model = new ShopModel($this -> model);
+                $this -> model -> handleShopActions();
+                $this -> model -> getShopItems();
                 break;
         }
     }
@@ -98,6 +103,38 @@ class PageController
             case "login":
                 require_once("views/LoginDoc.php");
                 $view = new LoginDoc($this -> model);
+                break;
+            case "thanks":
+                require_once("views/ThanksDoc.php");
+                $view = new ThanksDoc($this -> model);
+                break;
+            case "password":
+                require_once("views/PasswordDoc.php");
+                $view = new PasswordDoc($this -> model);
+                break;
+            case "confirmed":
+                require_once("views/ConfirmedDoc.php");
+                $view = new ConfirmedDoc($this -> model);
+                break;
+            case "shop":
+                require_once("views/ShopDoc.php");
+                $view = new ShopDoc($this -> model);
+                break;
+            case "top5":
+                require_once("views/Top5Doc.php");
+                $view = new Top5Doc($this -> model);
+                break;
+            case "details":
+                require_once("views/DetailsDoc.php");
+                $view = new DetailsDoc($this -> model);
+                break;
+            case "cart":
+                require_once("views/CartDoc.php");
+                $view = new CartDoc($this -> model);
+                break;
+            case "succeed":
+                require_once("views/SucceedDoc.php");
+                $view = new SucceedDoc($this -> model);
                 break;
             default:
                 require_once("views/NotFoundDoc.php");

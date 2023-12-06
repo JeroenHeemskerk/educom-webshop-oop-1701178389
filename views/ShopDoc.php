@@ -8,7 +8,8 @@ class ShopDoc extends ItemDoc {
     }
     protected function showContent()
     {
-        $this -> showItem("shop", $this -> data['items']);
+        $items = $this -> model -> getShopItems();
+        $this -> showItem("shop", $items);
     }
 }
 ?> 

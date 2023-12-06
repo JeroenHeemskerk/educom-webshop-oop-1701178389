@@ -32,7 +32,6 @@ class UserModel extends PageModel
 
     public function __construct($PageModel) {
         PARENT::__construct($PageModel);
-        PARENT::__construct(NULL);
     }
     
     //functie getAndClean maken

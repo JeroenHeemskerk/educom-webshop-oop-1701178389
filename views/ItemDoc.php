@@ -2,7 +2,6 @@
 require_once "BasicDoc.php";
 
 abstract class ItemDoc extends BasicDoc {
-    private function getItemFromDb() {echo 'database blijven we nog even af'; }
     protected function showItem($page, $items) 
     {       
         $counter = 0;
@@ -13,7 +12,7 @@ abstract class ItemDoc extends BasicDoc {
         foreach ($items as $row) {
             $commaPrice = number_format($row['price'], 2, ',', '.');
             $itemClass = ($counter % 2 == 0) ? 'evenItem' : 'oddItem';           
-            echo    '<a class="item" href="index_db.php?page=details&id=' . $row['id'] . '"><div class="' . $itemClass . '">' . PHP_EOL;
+            echo    '<a class="item" href="index.php?page=details&id=' . $row['id'] . '"><div class="' . $itemClass . '">' . PHP_EOL;
             switch($page)
             {
                 case "shop": 
@@ -43,7 +42,7 @@ abstract class ItemDoc extends BasicDoc {
             $topNumber++;
             require_once('session_manager.php'); 
             if (!empty(isUserLoggedIn())) {
-                echo '  <form action="index_db.php" method="post">
+                echo '  <form action="index.php" method="post">
                 <input type="hidden" name="page" value="' . $page . '">
                 <input type="hidden" name="id" value="' . $row['id'] . '">
                 <input type="hidden" name="action" value="storeItemInSession">
