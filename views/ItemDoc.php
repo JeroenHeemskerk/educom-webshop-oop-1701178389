@@ -9,6 +9,7 @@ abstract class ItemDoc extends BasicDoc {
         if (!is_array($items) || !isset($items[0])) {
             $items = array($items);
         }
+
         foreach ($items as $row) {
             $commaPrice = number_format($row['price'], 2, ',', '.');
             $itemClass = ($counter % 2 == 0) ? 'evenItem' : 'oddItem';           

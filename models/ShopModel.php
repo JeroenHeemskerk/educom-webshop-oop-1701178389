@@ -18,17 +18,19 @@ class ShopModel extends PageModel
     }
     
     public function getDetails()
-    {
+    {   
+        $id = $this -> getUrlVar("id");
         require_once('file_repository.php');
-        return getDetails();
+        return getDetails($id);          
     }
-    
+
+
     public function handleShopActions()
     {
         $action = $this -> getPostVar("action");
         switch ($action) {
             case "storeItemInSession":
-                $id = getPostVar("id");
+                $id = $this -> getPostVar("id");
                 require_once ('session_manager.php');
                 storeItemInSession ($id);
                 break;
