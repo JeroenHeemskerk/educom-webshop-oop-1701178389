@@ -90,6 +90,7 @@ class PageController
                 require_once("models/ShopModel.php");
                 $this -> model = new ShopModel($this -> model);
                 $this -> model -> handleShopActions();
+                $this -> model -> getCartItems();
                 break;
         }
     }

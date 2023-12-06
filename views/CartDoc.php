@@ -12,9 +12,12 @@ class CartDoc extends ItemDoc {
         {
             $cart = $_SESSION["cart"];
             require_once('file_repository.php');
-            $items = getShopItems();
+            $items = $this -> model -> getCartItems();
             $counter = 0;
             $total = 0;
+            echo 'Vardump Cart<br>'; var_dump($cart);
+            echo '<br><br> Vardump items<br>'; var_dump($items);
+
             foreach ($cart as $itemId => $quantity) {
                 $row = $items[$itemId];
                 $commaPrice = number_format($row['price'], 2, ',', '.');
@@ -33,7 +36,7 @@ class CartDoc extends ItemDoc {
                         </table>
                         </div></a>';
                     $total += $subtotal;
-                    $counter++;
+                    $counter ++;
             }
             $commaTotal = number_format($total, 2, ',', '.');
             echo    '<div class="total">

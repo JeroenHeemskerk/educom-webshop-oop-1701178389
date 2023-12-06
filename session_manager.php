@@ -37,7 +37,8 @@ function storeItemInSession($id)
   } else {
     $_SESSION['cart'][$id] = 1;
   }
-}
+  //var_dump($_SESSION['cart'])
+;}
 
 function unsetCart ()
 {

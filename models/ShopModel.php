@@ -24,6 +24,12 @@ class ShopModel extends PageModel
         return getDetails($id);          
     }
 
+    public function getCartItems()
+    {
+        require_once('file_repository.php');
+        return getCartItems();
+    }
+
 
     public function handleShopActions()
     {
@@ -31,11 +37,12 @@ class ShopModel extends PageModel
         switch ($action) {
             case "storeItemInSession":
                 $id = $this -> getPostVar("id");
+                //var_dump($id);
                 require_once ('session_manager.php');
                 storeItemInSession ($id);
                 break;
             case "insertOrderInDb":
-                $cart = [$_SESSION['cart']];
+                $cart = $this -> $_SESSION['cart'];
                 require_once('file_repository.php');
                 insertOrderInDb($cart);
                 require_once('session_manager.php');

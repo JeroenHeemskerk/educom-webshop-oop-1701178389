@@ -186,7 +186,7 @@ function getDetails ($itemId)
  }
 }
 
-//Dit hoort bij Top 5
+//Dit hoort bij Top 5 en Shop
 function getItemDetails ($itemId)
 {
     $dbInfo = startDatabase();
@@ -200,6 +200,27 @@ function getItemDetails ($itemId)
  } finally {
     mysqli_close($conn);
  }
+}
+
+function getCartItems ()
+{
+   $dbInfo = startDatabase();
+   //declareVariables
+   $conn = $dbInfo['conn'];
+try{
+   $sql =  "SELECT id 
+           FROM item";
+   $result = mysqli_query($conn, $sql);
+   $items = array();
+   while ($row = mysqli_fetch_assoc($result)) {
+       $itemId = $row; 
+       $itemInfo = getItemDetails($itemId);
+       $items[] = $itemInfo;
+   }
+   return $items;
+} finally {
+   mysqli_close($conn);
+}
 }
 
 //Order plaatsen
