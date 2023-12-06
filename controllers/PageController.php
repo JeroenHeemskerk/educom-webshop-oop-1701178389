@@ -74,6 +74,23 @@ class PageController
                 $this -> model -> handleShopActions();
                 $this -> model -> getShopItems();
                 break;
+            case "top5":
+                require_once("models/ShopModel.php");
+                $this -> model = new ShopModel($this -> model);
+                $this -> model -> handleShopActions();
+                $this -> model -> getTop5();
+                break;
+            case "details":
+                require_once("models/ShopModel.php");
+                $this -> model = new ShopModel($this -> model);
+                $this -> model -> handleShopActions();
+                $this -> model -> getDetails();
+                break;
+            case "cart":
+                require_once("models/ShopModel.php");
+                $this -> model = new ShopModel($this -> model);
+                $this -> model -> handleShopActions();
+                break;
         }
     }
 

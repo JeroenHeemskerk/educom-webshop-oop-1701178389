@@ -5,6 +5,24 @@ class ShopModel extends PageModel
         PARENT::__construct($PageModel);
     }
 
+    public function getShopItems()
+    {
+        require_once('file_repository.php');
+        return getShopItems();
+    }
+    
+    public function getTop5()
+    {
+        require_once('file_repository.php');
+        return getTop5();
+    }
+    
+    public function getDetails()
+    {
+        require_once('file_repository.php');
+        return getDetails();
+    }
+    
     public function handleShopActions()
     {
         $action = $this -> getPostVar("action");
@@ -23,16 +41,7 @@ class ShopModel extends PageModel
                 break;
         }
     }
-
-    public function getShopItems()
-    {
-        require_once('file_repository.php');
-        return getShopItems();
-    }
-
     
-
     
-
 }
 ?>
