@@ -221,14 +221,12 @@ function getItemDetails ($itemId)
 }
 
 //Order plaatsen
-function createOrder($cart)
+function createOrder($cart, $userId)
 {
     $dbInfo = startDatabase();
     //declareVariables
-    $userId = $_SESSION['userId']; 
     $conn = $dbInfo['conn'];
  try{
-    $cart = $_SESSION['cart'];
     $orderDate = date("ymdHis"); 
     $orderNumber = $orderDate . $userId;
     //in tabel orders plaatsen

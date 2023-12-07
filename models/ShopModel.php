@@ -48,8 +48,9 @@ class ShopModel extends PageModel
             case "createOrder":
                     $this -> cart = $this -> sessionManager -> getCart(); 
                 try {
+                    $this -> userId = $this -> sessionManager -> getLoggedInUserId();
                     require_once('file_repository.php');
-                    createOrder($this -> cart);
+                    createOrder($this -> cart, $this -> userId);
                     $this -> sessionManager -> unsetCart();
                     $this -> isOrdered = true;
                 }
