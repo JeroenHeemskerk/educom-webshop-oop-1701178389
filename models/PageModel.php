@@ -57,7 +57,7 @@ class PageModel
 
     public function createMenu()
     {
-        $menu = array('home' => 'Startpagina', 'about' => 'Over mij', 'contact' => 'Contact', 'shop' => 'Spellenwinkel', 'top5' => 'Top 5 spellen', 'register' => 'aanmelden', 'login' => 'Inloggen', 'cart' => 'Winkelwagen' );
+        $menu = array('home' => 'Startpagina', 'about' => 'Over mij', 'contact' => 'Contact', 'shop' => 'Spellenwinkel', 'top5' => 'Top 5 spellen', 'register' => 'aanmelden', 'password' => 'Instellingen', 'login' => 'Inloggen', 'cart' => 'Winkelwagen' );
         
         /*if ($this -> isUserLoggedIn()) {
             $menu['password'] = 'Instellingen';

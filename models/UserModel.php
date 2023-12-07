@@ -232,10 +232,48 @@ class UserModel extends PageModel
         }
     }
     
-    //Wachtwoord valideren
+    //Wachtwoord veranderen valideren
     public function validatePassword()
     {
+        if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+            $this -> getAndClean("oldPassword");
+            $this -> getAndClean("password");
+            $this -> getAndClean("PasswordRep");
 
+            if (empty($this -> oldPassword)) {
+                $this -> oldPasswordErr = "Uw oude wachtwoord is verplicht";
+            } else {
+                require_once('file_repository.php');
+                $passwordData -> checkPassword($this -> oldPassword);
+                switch($passwordData['result']) {
+                    case RESULT_OK:
+                        break;
+                    case RESULT_WRONG_PASSWORD:
+                        $this -> oldPasswordErr = "Uw wachtwoord is onjuist";
+                }
+            }     
+            if (empty($this -> password)) {
+                $this -> passwordErr = "Een nieuw wachtwoord is verplicht";
+            }    
+            if (empty($this -> passwordRep)) {
+                $this -> passwordRepErr = "Nieuwe wachtwoord herhalen is verplicht";                     
+            }
+            if (($this -> password) != ($this -> passwordRep)) {
+                $this -> passwordRepErr = $this -> passwordErr= "Wachtwoorden komen niet overeen";
+            }
+            if (empty($this -> oldPasswordErr) && empty($this -> passwordErr) && empty($this -> passwordRepErr))
+            {
+                $this -> valid = true;
+            }
+        }
+    }
+
+    //Wachtwoord updaten
+    public function updatePassword()
+    {
+        require_once('file_repository.php');
+        updatePassword($this -> oldPassword, $this -> password,);
     }
 
 }

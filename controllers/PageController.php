@@ -67,7 +67,8 @@ class PageController
                 {
                     $this -> model -> updatePassword();
                     $this -> model -> setPage("confirmed");
-                }  
+                } 
+                break; 
             case "shop":
                 require_once("models/ShopModel.php");
                 $this -> model = new ShopModel($this -> model);

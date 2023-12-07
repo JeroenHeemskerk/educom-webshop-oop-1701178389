@@ -95,38 +95,35 @@ function checkUserLogin($email, $password) {
 }
 
 //Wachtwoord wijzigen
-function checkPassword($data)
+function checkPassword($entered_password)
 {
     $dbInfo = startDatabase();
     //declareVariables
     $conn = $dbInfo['conn'];
  try {
-    $userId = $data['userId'];
-    $entered_password = $data['oldPassword'];
+    $userId = $_SESSION['userId'];
     $sql = "SELECT password FROM users WHERE id = '$userId'";
     $result = mysqli_query($conn, $sql);
     if ($result && $row = mysqli_fetch_array($result)) {
         if (password_verify($entered_password, $row['password'])) {
-            $data['oldPasswordErr'] ="";
+            return array('result' => RESULT_OK);
         } else {
-            $data['oldPasswordErr'] = 'Uw oude wachtwoord is onjuist';
+            return array('result' => RESULT_WRONG_PASSWORD);
         }
-        return $data;
+        return $entered_password;
     }
  }finally {
     mysqli_close($conn);
  }
 }
 //Wachtwoord wijzigen
-function updatePassword($data)
+function updatePassword($oldPassword, $newPassword)
 {
     $dbInfo = startDatabase();
     //declareVariables
     $conn = $dbInfo['conn'];
  try{
     $userId = $_SESSION['userId'];
-    $oldPassword = $data['oldPassword'];
-    $newPassword = $data['password'];
     $escapedPassword = mysqli_real_escape_string($conn, $newPassword);
     $checkOldPasswordQuery = "SELECT id, password FROM users WHERE id = '$userId'";
     $result = mysqli_query($conn, $checkOldPasswordQuery);
@@ -135,14 +132,13 @@ function updatePassword($data)
             $newHashedPassword = password_hash($newPassword, PASSWORD_BCRYPT, ['cost' => 14]);
             $updatePasswordQuery = "UPDATE users SET password = '$newHashedPassword' WHERE id= '$userId'";
             if(mysqli_query($conn, $updatePasswordQuery)) {
-                $data['valid'] = true;
+                $this -> model -> valid = true;
             } else {
                 echo "Error: " . $updatePasswordQuery . "<br>" . mysqli_error($conn);
-                $data['valid'] = false;
+                $this -> model -> valid = false;
             }
         }
     }
-    return $data;
  } finally {
     mysqli_close($conn);
  }
