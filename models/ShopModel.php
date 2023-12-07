@@ -10,6 +10,12 @@ class ShopModel extends PageModel
         require_once('file_repository.php');
         return getShopItems();
     }
+
+    public function getCartItems()
+    {
+        require_once('file_repository.php');
+        return getCartItems();
+    }
     
     public function getTop5()
     {
@@ -23,13 +29,6 @@ class ShopModel extends PageModel
         require_once('file_repository.php');
         return getDetails($id);          
     }
-
-    public function getCartItems()
-    {
-        require_once('file_repository.php');
-        return getCartItems();
-    }
-
 
     public function handleShopActions()
     {

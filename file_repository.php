@@ -170,6 +170,28 @@ function getShopItems ()
  }
 }
 
+//Cart
+function getCartItems() 
+{
+   $dbInfo = startDatabase();
+   //declareVariables
+   $conn = $dbInfo['conn'];
+try{
+   $sql =  "SELECT id 
+           FROM item";
+   $result = mysqli_query($conn, $sql);
+   $items = array();
+   while ($row = mysqli_fetch_assoc($result)) {
+       $itemId = $row['id']; 
+       $itemInfo = getItemDetails($itemId);
+       $items[$itemId] = $itemInfo;
+   }
+   return $items;
+} finally {
+   mysqli_close($conn);
+}
+}
+
 //Details
 function getDetails ($itemId)
 {
@@ -200,27 +222,6 @@ function getItemDetails ($itemId)
  } finally {
     mysqli_close($conn);
  }
-}
-
-function getCartItems ()
-{
-   $dbInfo = startDatabase();
-   //declareVariables
-   $conn = $dbInfo['conn'];
-try{
-   $sql =  "SELECT id 
-           FROM item";
-   $result = mysqli_query($conn, $sql);
-   $items = array();
-   while ($row = mysqli_fetch_assoc($result)) {
-       $itemId = $row; 
-       $itemInfo = getItemDetails($itemId);
-       $items[] = $itemInfo;
-   }
-   return $items;
-} finally {
-   mysqli_close($conn);
-}
 }
 
 //Order plaatsen

@@ -15,8 +15,6 @@ class CartDoc extends ItemDoc {
             $items = $this -> model -> getCartItems();
             $counter = 0;
             $total = 0;
-            echo 'Vardump Cart<br>'; var_dump($cart);
-            echo '<br><br> Vardump items<br>'; var_dump($items);
 
             foreach ($cart as $itemId => $quantity) {
                 $row = $items[$itemId];
