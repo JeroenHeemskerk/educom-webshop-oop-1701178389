@@ -25,9 +25,13 @@ class ShopModel extends PageModel
     
     public function getDetails()
     {   
-        $id = $this -> getUrlVar("id");
-        require_once('file_repository.php');
-        return getDetails($id);          
+        if ($this -> isPost) {
+            $id = $this -> getPostVar("id");
+        } else {
+            $id = $this -> getUrlVar("id");
+        }
+            require_once('file_repository.php');
+            return getDetails($id);          
     }
 
     public function handleShopActions()
