@@ -1,23 +1,26 @@
 <?php
+require_once("SessionManager.php");
+
 class PageModel
 {
     public $page;
     protected $isPost = false;
     public $menu;
     public $genericErr = '';
-    //protected $sessionManager;
+    protected $sessionManager;
+    public $allowedToBuy = false;
 
     public function __construct($copy) 
     {
         if(empty($copy)) 
         {
-      //      $this -> sessionManager = new SessionManager();
+            $this -> sessionManager = new SessionManager();
         } else {
             $this -> page = $copy -> page;
             $this -> isPost = $copy -> isPost;
             $this -> menu = $copy -> menu;
             $this -> genericErr = $copy -> genericErr;
-    //        $this -> sessionManager = $copy -> sessionManager;
+            $this -> sessionManager = $copy -> sessionManager;
         }
     }
 
@@ -57,16 +60,16 @@ class PageModel
 
     public function createMenu()
     {
-        $menu = array('home' => 'Startpagina', 'about' => 'Over mij', 'contact' => 'Contact', 'shop' => 'Spellenwinkel', 'top5' => 'Top 5 spellen', 'register' => 'aanmelden', 'password' => 'Instellingen', 'login' => 'Inloggen', 'cart' => 'Winkelwagen' );
-        
-        /*if ($this -> isUserLoggedIn()) {
+        $menu = array('home' => 'Startpagina', 'about' => 'Over mij', 'contact' => 'Contact', 'shop' => 'Spellenwinkel', 'top5' => 'Top 5 spellen');
+        if ($this -> sessionManager -> isUserLoggedIn()) {
             $menu['password'] = 'Instellingen';
             $menu['cart'] = 'Winkelwagen';
-            $menu['logout'] = $this -> getLoggedInUserName() . ' uitloggen';
+            $menu['logout'] = $this -> sessionManager -> getLoggedInUserName() . ' uitloggen';
+            $this -> allowedToBuy = true;
         } else {
             $menu['register'] = 'Aanmelden';
             $menu['login'] = 'Inloggen';
-        }*/
+        }
         $this -> menu = $menu;
     }
 }

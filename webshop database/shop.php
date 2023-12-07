@@ -19,9 +19,8 @@ function showShopContent()
                 '<img src="Images/' . $row['filename'] . '" width="100" height="100" alt="Afbeelding"> 
                 <h3>' . $row['name'] . '</h3>
                 € ' . $commaPrice . 
-                '<br><br>'; 
-        require_once('session_manager.php'); 
-        if (!empty(isUserLoggedIn())) {
+                '<br><br>';  
+        if ($this -> allowedToBuy) {
             echo '  <form action="index.php" method="post">
                         <input type="hidden" name="page" value="shop">
                         <input type="hidden" name="id" value="' . $row['id'] . '">

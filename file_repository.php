@@ -44,7 +44,7 @@ function checkUserExist($email) {
 }
 
 //Na register
-function storeUser($email, $name, $password)
+function createUser($email, $name, $password)
 {
     $dbInfo = startDatabase();
     //declareVariables
@@ -221,7 +221,7 @@ function getItemDetails ($itemId)
 }
 
 //Order plaatsen
-function insertOrderInDb($cart)
+function createOrder($cart)
 {
     $dbInfo = startDatabase();
     //declareVariables

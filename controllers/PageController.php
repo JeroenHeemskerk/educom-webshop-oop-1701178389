@@ -39,7 +39,7 @@ class PageController
                 $this -> model -> validateRegister();
                 if ($this -> model -> valid) 
                 {
-                    $this -> model -> storeUser();
+                    $this -> model -> createUser();
                     $this -> model -> setPage("login");
                 }
                 break;  
@@ -49,7 +49,7 @@ class PageController
                 $this -> model -> validateLogin();
                 if ($this -> model -> valid) 
                 {
-                    //$this -> model -> doLoginUser();
+                    $this -> model -> doLoginUser();
                     $this -> model -> setPage("home");
                 }
                 break;
@@ -91,7 +91,12 @@ class PageController
                 require_once("models/ShopModel.php");
                 $this -> model = new ShopModel($this -> model);
                 $this -> model -> handleShopActions();
-                $this -> model -> getCartItems();
+                if ($this -> model -> isOrdered) 
+                {
+                    $this -> model -> setPage("succeed");
+                } else {
+                    $this -> model -> getCartItems();
+                }
                 break;
         }
     }

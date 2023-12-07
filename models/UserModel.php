@@ -187,10 +187,10 @@ class UserModel extends PageModel
         }
     }
     //Succesvolle registratie
-    public function storeUser()
+    public function createUser()
     {
         require_once('file_repository.php');
-        storeUser($this -> email, $this -> name, $this -> password);
+        createUser($this -> email, $this -> name, $this -> password);
     }
 
     //Inloggen valideren
@@ -274,6 +274,17 @@ class UserModel extends PageModel
     {
         require_once('file_repository.php');
         updatePassword($this -> oldPassword, $this -> password,);
+    }
+
+    //Sessie
+    public function doLoginUser()
+    {
+        $this -> sessionManager -> doLoginUser($this -> name, $this -> userId);
+    }
+
+    public function doLogOutUser()
+    {
+        $this -> sessionManager -> doLogOutUser();
     }
 
 }

@@ -41,8 +41,8 @@ class CartDoc extends ItemDoc {
                         <p>
                             <h3>Totaal: € ' . $commaTotal . '</h3>
                             <form action="index.php" method="post">
-                            <input type="hidden" name="page" value="succeed">
-                            <input type="hidden" name="action" value="insertOrderInDb">
+                            <input type="hidden" name="page" value="cart">
+                            <input type="hidden" name="action" value="createOrder">
                             <input class="cartButton "type="submit" value="Afrekenen">
                             </form>
                         </p>                

@@ -15,7 +15,7 @@ function checkUserExist($data)                                                  
     return $data;
 }
 
-function storeUser($data)
+function createUser($data)
 {
     
     

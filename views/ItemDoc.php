@@ -41,8 +41,7 @@ abstract class ItemDoc extends BasicDoc {
                     '<br><br>' . PHP_EOL; 
             $counter++;
             $topNumber++;
-            require_once('session_manager.php'); 
-            if (!empty(isUserLoggedIn())) {
+            if ($this -> model -> allowedToBuy) {
                 echo '  <form action="index.php" method="post">
                 <input type="hidden" name="page" value="' . $page . '">
                 <input type="hidden" name="id" value="' . $row['id'] . '">

@@ -106,10 +106,10 @@ function handleActions ()
             require_once ('session_manager.php');
             storeItemInSession ($id);
             break;
-        case "insertOrderInDb":
+        case "createOrder":
             $cart = [$_SESSION['cart']];
             include_once('file_repository.php');
-            insertOrderInDb($cart);
+            createOrder($cart);
             include_once('session_manager.php');
             unsetCart();
             break;

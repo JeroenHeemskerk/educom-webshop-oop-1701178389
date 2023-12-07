@@ -16,8 +16,7 @@ function showItemDetails ($data)
                 " € " . $commaPrice . '<br><br>' .
                 $itemDetails['description'] .
                 '<br><br>';
-        require_once('session_manager.php');
-        if (!empty(isUserLoggedIn())) {
+        if ($this -> allowedToBuy) {
             echo '  <form action="index.php" method="post">
                         <input type="hidden" name="page" value="details">
                         <input type="hidden" name="id" value="' . $itemDetails['id'] . '">

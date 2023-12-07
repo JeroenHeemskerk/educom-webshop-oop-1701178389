@@ -1,6 +1,9 @@
 <?php
 class ShopModel extends PageModel
 {
+    public $cart = array();
+    public $isOrdered = false;
+
     public function __construct($PageModel) {
         PARENT::__construct($PageModel);
     }
@@ -40,17 +43,20 @@ class ShopModel extends PageModel
         switch ($action) {
             case "storeItemInSession":
                 $id = $this -> getPostVar("id");
-                //var_dump($id);
-                require_once ('session_manager.php');
-                storeItemInSession ($id);
+                $this -> sessionManager -> storeItemInSession ($id);
                 break;
-            case "insertOrderInDb":
-                $cart = $this -> $_SESSION['cart'];
-                require_once('file_repository.php');
-                insertOrderInDb($cart);
-                require_once('session_manager.php');
-                unsetCart();
-                break;
+            case "createOrder":
+                    $this -> cart = $this -> sessionManager -> getCart(); 
+                try {
+                    require_once('file_repository.php');
+                    createOrder($this -> cart);
+                    $this -> sessionManager -> unsetCart();
+                    $this -> isOrdered = true;
+                }
+                catch (Exception $ex) {
+
+                }
+                    break;
         }
     }
     
