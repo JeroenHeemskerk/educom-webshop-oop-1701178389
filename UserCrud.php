@@ -12,33 +12,42 @@ class UserCrud
     }
 
     //Methods
-    private function createUser($user) 
+    //Checken of het e-mailadres al bestaat
+    private function readUserByEmail($email) 
+    {
+        $sql = "SELECT name FROM users WHERE email = :email";
+        $params = array('email' => $email);
+        $this -> crud -> ReadOneRow($sql, $params);
+        //? Hoe stuur ik nu het RESULT terug naar het UserModel?
+
+    }
+
+    private function createUser($email, $name, $password) 
     {
         $sql = "INSERT INTO users (name, email, password)
                 VALUES (:name, :email, :password)";
         $params = array('name' => $name, 'email', => $email, 'password' => $hashedPassword);
         $this -> crud -> createRow($sql, $params);
     }
-    private function readUserByEmail() //checken of het e-mailadres al bestaat
-    {
-        $sql = "SELECT name FROM users WHERE email = :email";
-        $params = array('email' => $email);
-        $this -> crud -> ReadOneRow($sql, $params);
 
-    }
-    private function readUserPasswordByEmail() //checken of login klopt
+    //Checken of login klopt
+    private function readUserPasswordByEmail() 
     {
         $sql = "SELECT id, name, password FROM users WHERE email = :email";
         $params = array('email' = $email);
         $this -> crud -> ReadOneRow($sql, $params);
+        //? Hoe stuur ik nu het RESULT terug naar het UserModel?
     }
-    private function readUserPasswordById() //checken of het oude wachtwoord klopt 
+    
+    private function readUserPasswordById()
     {
-        $sql = "SELECT password FROM users WHERE id = :userId AND password = :password";
-        $params = array('userId' => $userId, 'password' => $oldPassword);
+        $sql = "SELECT id, name, password FROM users WHERE id = :id";
+        $params = array('id' = $userId);
         $this -> crud -> ReadOneRow($sql, $params);
+        //? Hoe stuur ik nu het RESULT terug naar het UserModel?
     }
-    private function updateUserPassword()
+
+    private function updateUserPassword($oldPassword, $password)
     {
         $sql = "UPDATE users SET password = :password WHERE id = :id and password = :oldPassword";
         $params = array('password' => $password, 'userId' => $userId, 'oldPassword' => $oldPassword);
