@@ -1,7 +1,10 @@
 <?php
 class PageController
 {
+    //Properties
     private $model;
+    
+    //Methods
     public function __construct()
     {
         require_once("models/PageModel.php");

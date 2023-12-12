@@ -1,6 +1,8 @@
 <?php
-class Crud
-{   
+    
+    class Crud
+    {   
+    //Properties 
     private $username = "nicole_web_shop_user";
     private $password = "5-W?QM&mEXws%V>";
     private $connectionString = "mysql:host=localhost;dbname=nicole_web_shop_user";
@@ -27,6 +29,7 @@ class Crud
     {
         $this -> connectDatabase();
         $this -> prepareAndBind($sql, $params);
+        echo 'Hij komt hier <br>'; var_dump($this -> pdo);
         return $this -> pdo -> lastInsertId();
     }
 

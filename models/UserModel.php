@@ -1,4 +1,5 @@
 <?php
+
 class UserModel extends PageModel 
 {
     public $salut ='';
@@ -32,12 +33,10 @@ class UserModel extends PageModel
     private $userCrud;
 
     //Dependency Injection
-    __construct($userCrud)
+    public function __construct($PageModel)
     {
-        $this -> userCrud = userCrud;
-    }
-
-    public function __construct($PageModel) {
+        require_once("UserCrud.php");
+        $this -> userCrud = new UserCrud();
         PARENT::__construct($PageModel);
     }
     
@@ -162,14 +161,13 @@ class UserModel extends PageModel
             }
             if (empty($this -> email)) {
                 $this -> emailErr = "E-mailadres is verplicht";
-            }   else { 
-                    require_once ('file_repository.php');                        
-                    $userData = checkUserExist($this -> email); 
+            }   else {                     
+                    $userData = $this -> userCrud -> readUserByEmail($this -> email); 
                     switch($userData['result']) {
                         case RESULT_USER_ALREADY_EXIST:
                             $this -> emailErr = "Dit e-mailadres is al in gebruik";
                             break;
-                        case RESULT_REGISTER_OK:
+                        case RESULT_OK:
                             break;                        
                     }
                     if (empty($this -> emailErr)) {
@@ -196,8 +194,10 @@ class UserModel extends PageModel
     //Succesvolle registratie
     public function createUser()
     {
-        require_once('file_repository.php');
-        createUser($this -> email, $this -> name, $this -> password);
+        //$raw_password = $this -> password;
+        //$hashed_password = password_hash($raw_password, PASSWORD_BCRYPT, ['cost' =>14]);
+        //$this -> password = $hashed_password
+        $this -> userCrud -> createUser($this -> email, $this -> name, $this -> password);
     }
 
     //Inloggen valideren
@@ -220,13 +220,13 @@ class UserModel extends PageModel
                 $this -> passwordErr = "Wachtwoord is verplicht";
             }                                                       
             else {
-                require_once('file_repository.php');
-                $userData = checkUserLogin($this -> email, $this -> password);   
+                $userData = $this -> userCrud -> readUserPasswordByEmail($this -> email, $this -> password);
+                var_dump($userData);
                 switch($userData['result']) {
                     case RESULT_OK:
                         $this -> valid = true;
-                        $this -> userId = $userData['user']['id'];
-                        $this -> name = $userData['user']['name'];
+                        $this -> userId = $userData['id'];
+                        $this -> name = $userData['name'];
                         break;
                     case RESULT_UNKNOWN_USER:
                         $this -> emailErr = "Email adres niet bekend";
@@ -251,8 +251,7 @@ class UserModel extends PageModel
             if (empty($this -> oldPassword)) {
                 $this -> oldPasswordErr = "Uw oude wachtwoord is verplicht";
             } else {
-                require_once('file_repository.php');
-                $passwordData -> checkPassword($this -> oldPassword);
+                $passwordData -> readUserPasswordById($this -> userId, $this -> oldPassword);
                 switch($passwordData['result']) {
                     case RESULT_OK:
                         break;
@@ -279,7 +278,7 @@ class UserModel extends PageModel
     //Wachtwoord updaten
     public function updatePassword()
     {
-        require_once('file_repository.php');
+        $newHashedPassword = password_hash($this -> password, PASSWORD_BCRYPT, ['cost' => 14]);
         updatePassword($this -> oldPassword, $this -> password,);
     }
 
@@ -295,12 +294,13 @@ class UserModel extends PageModel
     }
 
 }
-
+//*/
 ?>
 
 <?php
 
-/*Back-up voor CRUD aanpassingen 
+/*
+//Back-up voor CRUD aanpassingen 
 class UserModel extends PageModel 
 {
     public $salut ='';
@@ -590,5 +590,5 @@ class UserModel extends PageModel
     }
 
 }
-
+//*/
 ?>
