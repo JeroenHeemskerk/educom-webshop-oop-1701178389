@@ -3,12 +3,13 @@ class PageController
 {
     //Properties
     private $model;
-    
+    private $factory;
+        
     //Methods
-    public function __construct()
+    public function __construct($factory)
     {
-        require_once("models/PageModel.php");
-        $this -> model = new PageModel(NULL);
+        $this -> factory = $factory;
+        $this -> model = $this -> factory -> createModel('Page');
     }
     public function handleRequest() 
     {
@@ -29,7 +30,7 @@ class PageController
         {
             case "contact":
                 require_once("models/UserModel.php");
-                $this -> model = new UserModel($this -> model);
+                $this -> model = $this -> factory -> createModel('User');
                 $this -> model -> validateContact();
                 if ($this -> model -> valid) 
                 {
@@ -38,7 +39,7 @@ class PageController
                 break;
             case "register":
                 require_once("models/UserModel.php");
-                $this -> model = new UserModel($this -> model);
+                $this -> model = $this -> factory -> createModel('User');
                 $this -> model -> validateRegister();
                 if ($this -> model -> valid) 
                 {
@@ -48,7 +49,7 @@ class PageController
                 break;  
             case "login":
                 require_once("models/UserModel.php");
-                $this -> model = new UserModel($this -> model);
+                $this -> model = $this -> factory -> createModel('User');
                 $this -> model -> validateLogin();
                 if ($this -> model -> valid) 
                 {
@@ -58,13 +59,13 @@ class PageController
                 break;
             case "logout":
                 require_once("models/UserModel.php");
-                $this -> model = new UserModel($this -> model);
+                $this -> model = $this -> factory -> createModel('User');
                 $this -> model -> doLogoutUser();
                 $this -> model -> setPage("home");
                 break;
             case "password":
                 require_once("models/UserModel.php");
-                $this -> model = new UserModel($this -> model);
+                $this -> model = $this -> factory -> createModel('User');
                 $this -> model -> validatePassword();
                 if ($this -> model -> valid) 
                 {

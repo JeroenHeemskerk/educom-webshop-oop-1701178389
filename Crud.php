@@ -29,7 +29,6 @@
     {
         $this -> connectDatabase();
         $this -> prepareAndBind($sql, $params);
-        echo 'Hij komt hier <br>'; var_dump($this -> pdo);
         return $this -> pdo -> lastInsertId();
     }
 

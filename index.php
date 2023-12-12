@@ -1,13 +1,14 @@
 <?php
 session_start();
 require_once("controllers/PageController.php");
+require_once("ModelFactory.php");
 require_once("Crud.php");
 
-$controller = new PageController();
+$crud = new crud();
+$modelFactory = new ModelFactory($crud);
+//$crudFactory = new CrudFactory($crud);
+
+$controller = new PageController($modelFactory);
 $controller -> handleRequest();
 
-//$crud = new crud();
-
-//$crudFactory = new CrudFactory($crud);
-//$modelFactory = new ModelFactory($crud);
 ?>

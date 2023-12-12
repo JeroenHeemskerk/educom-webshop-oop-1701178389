@@ -31,12 +31,11 @@ class UserModel extends PageModel
     private $userId = 0;
     public $valid = false;
     private $userCrud;
-
+    
     //Dependency Injection
-    public function __construct($PageModel)
+    public function __construct($PageModel, $crud)
     {
-        require_once("UserCrud.php");
-        $this -> userCrud = new UserCrud();
+        $this -> crud = $crud;
         PARENT::__construct($PageModel);
     }
     
@@ -220,8 +219,7 @@ class UserModel extends PageModel
                 $this -> passwordErr = "Wachtwoord is verplicht";
             }                                                       
             else {
-                $userData = $this -> userCrud -> readUserPasswordByEmail($this -> email, $this -> password);
-                var_dump($userData);
+                $userData = $this -> crud -> readUserPasswordByEmail($this -> email, $this -> password);
                 switch($userData['result']) {
                     case RESULT_OK:
                         $this -> valid = true;
