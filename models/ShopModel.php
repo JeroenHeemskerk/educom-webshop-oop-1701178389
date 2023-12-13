@@ -3,38 +3,51 @@ class ShopModel extends PageModel
 {
     public $cart = array();
     public $isOrdered = false;
+    public $items = array();
+    private $shopCrud;
+    private $itemId;
+    private $id;
+    private $orderNumber;
+    private $userId;
 
-    public function __construct($PageModel) {
+
+    public function __construct($PageModel, $crud) 
+    {
+        $this -> crud = $crud;
         PARENT::__construct($PageModel);
     }
 
     public function getShopItems()
     {
-        require_once('file_repository.php');
-        return getShopItems();
+        $this -> items = $this -> crud -> readAllItems();
     }
 
-    public function getCartItems()
-    {
-        require_once('file_repository.php');
-        return getCartItems();
-    }
-    
     public function getTop5()
     {
-        require_once('file_repository.php');
-        return getTop5();
+        $this -> itemId = $this -> crud -> readTop5();
+        foreach ($this -> itemId as $object)
+        {
+            array_push($this -> items, $this -> crud -> readItemById($object -> item_id));
+        }
     }
     
     public function getDetails()
     {   
         if ($this -> isPost) {
-            $id = $this -> getPostVar("id");
+            $this -> id = $this -> getPostVar("id");
         } else {
-            $id = $this -> getUrlVar("id");
+            $this -> id = $this -> getUrlVar("id");
         }
-            require_once('file_repository.php');
-            return getDetails($id);          
+        $this -> items = $this -> crud -> readItemById($this -> id);       
+    }
+    
+    public function getCartItems()
+    {
+        $this -> cart = $this -> sessionManager -> getCart();
+        foreach ($this -> cart as $key => $value)
+        {
+            $this -> items[$key] = $this -> crud -> readItemById($key);
+        }
     }
 
     public function handleShopActions()
@@ -48,14 +61,15 @@ class ShopModel extends PageModel
             case "createOrder":
                     $this -> cart = $this -> sessionManager -> getCart(); 
                 try {
+                    $orderDate = date("ymdHis"); 
                     $this -> userId = $this -> sessionManager -> getLoggedInUserId();
-                    require_once('file_repository.php');
-                    createOrder($this -> cart, $this -> userId);
+                    $this -> orderNumber = $orderDate . $this -> userId;
+                    $this -> crud -> createOrder($this -> userId, $this -> orderNumber, $this -> cart);
                     $this -> sessionManager -> unsetCart();
                     $this -> isOrdered = true;
                 }
                 catch (Exception $ex) {
-
+                        var_dump($ex);
                 }
                     break;
         }

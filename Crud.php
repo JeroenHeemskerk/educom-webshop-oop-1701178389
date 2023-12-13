@@ -20,7 +20,7 @@
         $this -> stmt = $this -> pdo-> prepare("$sql"); 
         foreach ($params as $key => $value)
         {
-            $this -> stmt -> bindValue($key, $value);
+            $this -> stmt -> bindValue(':'.$key, $value);
         }
         $this -> stmt -> execute();
     }
@@ -29,6 +29,7 @@
     {
         $this -> connectDatabase();
         $this -> prepareAndBind($sql, $params);
+        echo'hij komt hier';
         return $this -> pdo -> lastInsertId();
     }
 

@@ -8,8 +8,7 @@ class DetailsDoc extends ItemDoc {
     }
     protected function showContent()
     {
-        $items = $this -> model -> getDetails();
-        $this->showItem("details", $items);
+        $this -> showItem("details", $this -> model -> items);
     }
 }
 

@@ -54,6 +54,7 @@ class PageController
                 if ($this -> model -> valid) 
                 {
                     $this -> model -> doLoginUser();
+                    $this -> model -> setCart();
                     $this -> model -> setPage("home");
                 }
                 break;
@@ -75,25 +76,25 @@ class PageController
                 break; 
             case "shop":
                 require_once("models/ShopModel.php");
-                $this -> model = new ShopModel($this -> model);
+                $this -> model = $this -> factory -> createModel('Shop');
                 $this -> model -> handleShopActions();
                 $this -> model -> getShopItems();
                 break;
             case "top5":
                 require_once("models/ShopModel.php");
-                $this -> model = new ShopModel($this -> model);
+                $this -> model = $this -> factory -> createModel('Shop');
                 $this -> model -> handleShopActions();
                 $this -> model -> getTop5();
                 break;
             case "details":
                 require_once("models/ShopModel.php");
-                $this -> model = new ShopModel($this -> model);
+                $this -> model = $this -> factory -> createModel('Shop');
                 $this -> model -> handleShopActions();
                 $this -> model -> getDetails();
                 break;
             case "cart":
                 require_once("models/ShopModel.php");
-                $this -> model = new ShopModel($this -> model);
+                $this -> model = $this -> factory -> createModel('Shop');
                 $this -> model -> handleShopActions();
                 if ($this -> model -> isOrdered) 
                 {

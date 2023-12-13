@@ -59,15 +59,22 @@ class UserCrud
     }
         //? Hoe stuur ik nu het RESULT terug naar het UserModel?
     
-    public function readUserPasswordById($userId)
+    public function readUserPasswordById($userId, $password)
     {
         $sql = "SELECT id, name, password FROM users WHERE id = :id";
         $params = array('id' => $userId);
-        $this -> crud -> readOneRow($sql, $params);
-        //? Hoe stuur ik nu het RESULT terug naar het UserModel?
+        $userData = $this -> crud -> readOneRow($sql, $params);
+        echo'hij komt hier';
+        if ($userData) {
+            if ($userData -> password == $password) {
+                return array('result' => RESULT_OK);
+            } else {
+                return array('result' => RESULT_WRONG_PASSWORD);
+            }
+        }
     }
 
-    public function updateUserPassword($oldPassword, $password)
+    public function updateUserPassword($oldPassword, $password, $userId)
     {
         $sql = "UPDATE users SET password = :password WHERE id = :id and password = :oldPassword";
         $params = array('password' => $password, 'userId' => $userId, 'oldPassword' => $oldPassword);

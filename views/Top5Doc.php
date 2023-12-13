@@ -8,8 +8,7 @@ class Top5Doc extends ItemDoc {
     }
     protected function showContent()
     {
-        $items = $this -> model -> getTop5();
-        $this -> showItem("top5", $items);
+        $this -> showItem("top5", $this -> model -> items);
     }
 }
 ?> 

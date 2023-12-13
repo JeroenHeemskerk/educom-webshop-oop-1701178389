@@ -4,6 +4,9 @@
       $_SESSION["name"] = $name; 
       $_SESSION["userId"] = $userId;
     }
+    public function setCart(){
+        $_SESSION['cart'] = array();
+    }
     public function doLogoutUser() {
       unset($_SESSION["name"]);
       unset($_SESSION["cart"]);
