@@ -13,8 +13,7 @@ $shopCrud = new shopCrud($crud);
 $orderDate = date("ymdHis"); 
 
 $orderNumber = $orderDate . '30';
-$temp = $shopCrud -> createOrder(30, $orderNumber, array('user_id' =>'1', 'order_number' => '43' ));
-
+$temp = $shopCrud -> createOrder(30, $orderNumber, array('1' =>'1', '2' => '43' ));
 
 var_dump($temp);
 

@@ -6,14 +6,13 @@ class ShopCrud
     private $crud;
 
     //Dependency Injection
-    public function __construct()
+    public function __construct($crud)
     {
-        require_once("Crud.php");
-        $this -> crud = new crud();
+        $this -> crud = $crud;
     }
 
     //Methods
-    public function readAllItems()       // !! DEZE NAAM NOG AANPASSEN IN SHOPMODEL !!
+    public function readAllItems()
     {
         $sql = "SELECT * FROM items";
         $params = array();
@@ -43,16 +42,16 @@ class ShopCrud
 
     public function createOrder($userId, $orderNumber, $cart)
     {
-        $sql = "INSERT INTO orders (user_id, order_nr) VALUES (':user_id', ':order_number')";
+        $sql = "INSERT INTO orders (user_id, order_nr) VALUES (:user_id, :order_number)";
         $params = array('user_id' => $userId, 'order_number' => $orderNumber);
         var_dump($sql);
         var_dump($params);
         $orderId = $this -> crud -> createRow($sql, $params);
         var_dump($orderId);
-        $sql = "INSERT INTO order_line (order_id, item_id, quantity) VALUE (':order_id', ':item_id', ':quantity')";
+        $sql = "INSERT INTO order_line (order_id, item_id, quantity) VALUE (:order_id, :item_id, :quantity)";
         foreach ($cart as $itemId => $quantity)
         {
-            $params = array('order_id' => $orderId, 'item_id' => $cart['itemId'], 'quantity' => $cart['quantity']);
+            $params = array('order_id' => $orderId, 'item_id' => $itemId, 'quantity' => $quantity);
             $this -> crud -> createRow($sql, $params);
         }
     }

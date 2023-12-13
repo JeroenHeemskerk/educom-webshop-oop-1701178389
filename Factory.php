@@ -3,11 +3,16 @@ require_once("models/PageModel.php");
 require_once("UserCrud.php");
 require_once("ShopCrud.php");
 
-class ModelFactory 
+class factory 
 {
     //Properties
     private $crud;
     private $model;
+
+    public function __construct($crud)
+    {
+        $this -> crud = $crud;
+    }
 
     //Methods
     public function createCrud($name)

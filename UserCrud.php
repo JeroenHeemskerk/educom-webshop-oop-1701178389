@@ -12,10 +12,9 @@ class UserCrud
     private $crud;
     
     //Dependency Injection
-    public function __construct()
+    public function __construct($crud)
     {
-        require_once("Crud.php");
-        $this -> crud = new crud();
+        $this -> crud = $crud;
     }
 
     //Methods

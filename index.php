@@ -5,10 +5,9 @@ require_once("Factory.php");
 require_once("Crud.php");
 
 $crud = new crud();
-$modelFactory = new ModelFactory($crud);
-//$crudFactory = new CrudFactory($crud);
+$factory = new factory($crud);
 
-$controller = new PageController($modelFactory);
+$controller = new PageController($factory);
 $controller -> handleRequest();
 
 ?>

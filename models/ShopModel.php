@@ -11,9 +11,9 @@ class ShopModel extends PageModel
     private $userId;
 
 
-    public function __construct($PageModel, $crud) 
+    public function __construct($PageModel, $shopCrud) 
     {
-        $this -> crud = $crud;
+        $this -> crud = $shopCrud;
         PARENT::__construct($PageModel);
     }
 
