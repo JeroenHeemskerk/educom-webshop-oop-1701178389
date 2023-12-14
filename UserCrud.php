@@ -63,7 +63,6 @@ class UserCrud
         $sql = "SELECT id, name, password FROM users WHERE id = :id";
         $params = array('id' => $userId);
         $userData = $this -> crud -> readOneRow($sql, $params);
-        echo'hij komt hier';
         if ($userData) {
             if ($userData -> password == $password) {
                 return array('result' => RESULT_OK);
