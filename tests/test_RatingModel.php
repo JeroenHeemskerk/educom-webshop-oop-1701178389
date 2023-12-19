@@ -1,6 +1,7 @@
 <?php
 require_once '../Crud.php';
 include_once('../RatingCrud.php');
+include_once('../RatingModel.php';)
 
 $crud = new Crud();
 $ratingCrud = new ratingCrud($crud);

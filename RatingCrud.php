@@ -30,7 +30,7 @@ class RatingCrud
 
     public function readRatingByItemId($itemId)
     {
-        $sql = "SELECT AVG(stars) as AvgStars
+        $sql = "SELECT AVG(stars) as avgStars, item_id
                 FROM ratings
                 WHERE item_id = :item_id";
         $params = array('item_id' => $itemId);
@@ -39,10 +39,10 @@ class RatingCrud
 
     public function readRatingByUserId($userId, $itemId)
     {
-        $sql = "SELECT stars,
+        $sql = "SELECT stars, item_id
                 FROM ratings
-                WHERE user_id = :user_id AND item_id = :item_id";
-        $params = array();
+                WHERE user_id = :user_id and item_id = :item_id";
+        $params = array('user_id' => $userId, 'item_id' => $itemId);
         return $this -> crud -> readOneRow($sql, $params);
     }
 

@@ -28,16 +28,40 @@ class RatingModel extends PageModel
         {
             $this -> function = $this -> getPostVar('function', '');
             $this -> newRating = $this -> getPostVar('stars', 0);
-            $this -> itemId = $this -> getPostVar('itemId', 0);
+            $this -> itemId = $this -> getPostVar('id', 0);
             $this -> user['id'] = $this -> sessionManager -> getLoggedInUserId();
         } else {
             $this -> function = $this -> getUrlVar('function', '');
             $this -> newRating = $this -> getUrlVar('stars', 0);
-            $this -> itemId = $this -> getUrlVar('itemId', 0);
+            $this -> itemId = $this -> getUrlVar('id', 0);
             $this -> user['id'] = $this -> sessionManager -> getLoggedInUserId();
         }
     }
 
+    
+    public function getRating()
+    {
+        if ($this -> loggedIn)
+        {
+            $this -> getMyRating();
+        }
+        $this -> getAvgRating();
+        $this -> output = array($this -> avgRating, $this -> myRating);
+    }
+    
+    public function getMyRating()
+    {
+        $value = $this -> crud -> readRatingByUserId($this -> sessionManager -> getLoggedInUserId(), $this -> itemId);
+        //var_dump($value);
+        $this -> myRating = new ItemRating($value -> item_id, $value -> stars);
+    }
+
+    public function getAvgRating()
+    {
+        $value = $this -> crud -> readRatingByItemId($this -> itemId);
+        $this -> avgRating = new ItemRating($value -> item_id, $value -> avgStars);
+    }
+    
     public function getRatings()
     {
         if ($this -> loggedIn)
@@ -66,11 +90,12 @@ class RatingModel extends PageModel
 
     public function rateItem()
     {
-        if (isset($this -> myRatings[$this -> itemId]))
+        $this -> myRating = $this -> crud -> readRatingByUserId($this -> sessionManager -> getLoggedInUserId(), $this -> itemId);
+        if ($this -> myRating == false)
         {
-            $this -> crud -> updateRating($this -> sessionManager -> getLoggedInUserId(), $this -> itemId, $this -> newRating);
-        } else {
             $this -> crud -> createRating($this -> sessionManager -> getLoggedInUserId(), $this -> itemId, $this -> newRating);
+        } else {
+            $this -> crud -> updateRating($this -> sessionManager -> getLoggedInUserId(), $this -> itemId, $this -> newRating);
         }
         $this -> myRatings[$this -> itemId] = $this -> newRating;
     }

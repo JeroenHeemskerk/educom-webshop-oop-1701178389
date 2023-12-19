@@ -46,7 +46,6 @@ a:hover {
 div {
     color: darkgray;
     font-size: 12px;
-    background-color: white;
 }
 
 ::placeholder, .sel {
@@ -145,14 +144,11 @@ td {
 
 .avgStars, .myStars {
     font-size: 20px;
-    color:lightslategray;
+    color:sandybrown;
     cursor: pointer;
     width: 40px;
 }
 
 .star:hover {
-    color:sandybrown;
-}
-.ratedStar{
     color:sandybrown;
 }

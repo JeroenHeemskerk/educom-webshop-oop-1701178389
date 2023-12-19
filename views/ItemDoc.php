@@ -11,8 +11,9 @@ abstract class ItemDoc extends BasicDoc {
         }
         foreach ($items as $row) {
             $commaPrice = number_format($row -> price, 2, ',', '.');
-            $itemClass = ($counter % 2 == 0) ? 'evenItem' : 'oddItem';           
-            echo    '<a class="item" href="index.php?page=details&id=' . $row -> id . '"><div class="' . $itemClass . '">' . PHP_EOL;
+            $itemClass = ($counter % 2 == 0) ? 'evenItem' : 'oddItem';
+            echo    '<a class="item" href="index.php?page=details&id=' . $row -> id . '">' . PHP_EOL;           
+            echo    '<div class="' . $itemClass . '">' . PHP_EOL;
             switch($page)
             {
                 case "shop": 
@@ -28,7 +29,7 @@ abstract class ItemDoc extends BasicDoc {
                     break;
             }
             echo    '<h3>' . $row -> name . '</h3>';
-            echo    '<div class="avgStars " data-item-id ="' . $row -> id . '"></div><br><br>';
+            echo    '<div class="avgStars " data-item-id ="' . $row -> id . '"></div><br>';
             switch($page)
             {
                 case "details":
@@ -38,7 +39,6 @@ abstract class ItemDoc extends BasicDoc {
                     break;
             }
             echo    ' € ' . $commaPrice . '<br>';
-            echo    '<div class="myStars " data-item-id ="' . $row -> id . '"></div>';
             echo    '<br>' . PHP_EOL; 
             $counter++;
             $topNumber++;
@@ -49,8 +49,10 @@ abstract class ItemDoc extends BasicDoc {
                 <input type="hidden" name="action" value="storeItemInSession">
                 <input class="cartButton "type="submit" value="Voeg toe aan winkelwagentje"><br>
                 </form>';
+                echo    '<br><div class="myStars " data-item-id ="' . $row -> id . '"></div>';
                 }
-                echo    '</div></a>';
+                echo    '</div>';
+                echo    '</a>';
         }
     }
 }
