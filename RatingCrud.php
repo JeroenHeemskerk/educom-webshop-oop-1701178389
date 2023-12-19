@@ -37,13 +37,31 @@ class RatingCrud
         return $this -> crud -> readOneRow($sql, $params);
     }
 
-    public function readAllRatings()
+    public function readRatingByUserId($userId, $itemId)
+    {
+        $sql = "SELECT stars,
+                FROM ratings
+                WHERE user_id = :user_id AND item_id = :item_id";
+        $params = array();
+        return $this -> crud -> readOneRow($sql, $params);
+    }
+
+    public function readAllAvgRatings()
     {
         $sql = "SELECT AVG(stars) as avgStars, item_id
                 FROM ratings
                 GROUP BY item_id
                 ORDER BY item_id";
         $params = array();
+        return $this -> crud -> readManyRows($sql, $params);
+    }
+
+    public function readAllRatingsByUserId($userId)
+    {
+        $sql = "SELECT stars, item_id
+                FROM ratings
+                WHERE user_id = :user_id";
+        $params = array('user_id' => $userId);
         return $this -> crud -> readManyRows($sql, $params);
     }
 }

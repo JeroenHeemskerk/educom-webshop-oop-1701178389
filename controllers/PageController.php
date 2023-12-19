@@ -1,9 +1,10 @@
 <?php
+
 class PageController
 {
     //Properties
-    private $model;
-    private $factory;
+    public $model;
+    public $factory;
         
     //Methods
     public function __construct($factory)
@@ -11,12 +12,27 @@ class PageController
         $this -> factory = $factory;
         $this -> model = $this -> factory -> createModel('Page');
     }
+
     public function handleRequest() 
     {
+        $this -> checkAjax();
         $this -> getRequest();
         $this -> processRequest();
         $this -> showResponse();
     }
+
+    private function checkAjax()
+    {
+        $action = isset($_GET['action']) ? $_GET['action'] : (isset($_POST['action']) ? $_POST['action'] : '');
+
+        if ($action == 'ajax') {
+            require_once "AjaxController.php";
+            $ajaxController = new AjaxController($this -> factory);
+            $ajaxController -> handleRequest();
+            exit;
+        }
+    }
+
     //From client
     private function getRequest()
     {

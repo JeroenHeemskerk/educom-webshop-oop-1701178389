@@ -28,7 +28,7 @@ class UserModel extends PageModel
     public $oldPasswordErr = '';
     public $comErr = '';
     public $messageErr = '';
-    private $userId = 0;
+    private $userId;
     public $valid = false;
     private $userCrud;
     
@@ -250,7 +250,6 @@ class UserModel extends PageModel
                 $this -> oldPasswordErr = "Uw oude wachtwoord is verplicht";
             } else {
                 $passwordData = $this -> crud -> readUserPasswordById($this -> userId, $this -> oldPassword);
-                var_dump($passwordData);
                 switch($passwordData['result']) {
                     case RESULT_OK:
                         break;

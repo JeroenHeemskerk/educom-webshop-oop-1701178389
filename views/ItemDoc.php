@@ -27,7 +27,8 @@ abstract class ItemDoc extends BasicDoc {
                     echo '<img src="Images/' . $row -> filename . '" width="300" height="300" alt="Afbeelding"><br>' . PHP_EOL;
                     break;
             }
-            echo    '<h3>' . $row -> name . '</h3>' . PHP_EOL;
+            echo    '<h3>' . $row -> name . '</h3>';
+            echo    '<div class="avgStars " data-item-id ="' . $row -> id . '"></div><br><br>';
             switch($page)
             {
                 case "details":
@@ -36,8 +37,9 @@ abstract class ItemDoc extends BasicDoc {
                 default:
                     break;
             }
-            echo    ' € ' . $commaPrice . 
-                    '<br><br>' . PHP_EOL; 
+            echo    ' € ' . $commaPrice . '<br>';
+            echo    '<div class="myStars " data-item-id ="' . $row -> id . '"></div>';
+            echo    '<br>' . PHP_EOL; 
             $counter++;
             $topNumber++;
             if ($this -> model -> allowedToBuy) {
@@ -49,7 +51,7 @@ abstract class ItemDoc extends BasicDoc {
                 </form>';
                 }
                 echo    '</div></a>';
-            }
+        }
     }
 }
 

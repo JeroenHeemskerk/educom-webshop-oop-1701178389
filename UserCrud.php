@@ -9,7 +9,6 @@ define("RESULT_REGISTER_OK", -4);
 class UserCrud
 {
     //Properties
-    private $crud;
     
     //Dependency Injection
     public function __construct($crud)
@@ -24,7 +23,6 @@ class UserCrud
         $sql = "SELECT * FROM users WHERE email = :email";
         $params = array('email' => $email);
         $checkUserExist = $this -> crud -> readOneRow($sql, $params);
-        //var_dump($checkUserExist);
         if (!$checkUserExist) {
             return array('result' => RESULT_OK);
         } else {

@@ -44,10 +44,7 @@ class ShopCrud
     {
         $sql = "INSERT INTO orders (user_id, order_nr) VALUES (:user_id, :order_number)";
         $params = array('user_id' => $userId, 'order_number' => $orderNumber);
-        var_dump($sql);
-        var_dump($params);
         $orderId = $this -> crud -> createRow($sql, $params);
-        var_dump($orderId);
         $sql = "INSERT INTO order_line (order_id, item_id, quantity) VALUE (:order_id, :item_id, :quantity)";
         foreach ($cart as $itemId => $quantity)
         {

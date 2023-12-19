@@ -1,16 +1,15 @@
 <?php
 class ShopModel extends PageModel
 {
+    //Properties
     public $cart = array();
     public $isOrdered = false;
     public $items = array();
-    private $shopCrud;
     private $itemId;
     private $id;
     private $orderNumber;
-    private $userId;
 
-
+    //Methods
     public function __construct($PageModel, $shopCrud) 
     {
         $this -> crud = $shopCrud;
@@ -69,7 +68,6 @@ class ShopModel extends PageModel
                     $this -> isOrdered = true;
                 }
                 catch (Exception $ex) {
-                        var_dump($ex);
                 }
                     break;
         }

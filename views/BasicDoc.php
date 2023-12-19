@@ -8,12 +8,31 @@ class BasicDoc extends HtmlDoc
     {
         $this -> model = $model;
     }
-    private function showTitle() {echo '<title>' . $this -> model -> page . '</title>';}
-    private function showCssLinks() {echo' <link rel="stylesheet" href="CSS/stylesheet.css">';}
-
-    private function showHeaderStart() {echo '<header><h1>';}
-    protected function showHeader() {echo 'moet overriden worden';}
-    private function showHeaderEnd() {echo '</h1></header>';}
+    private function showTitle() 
+    {
+        echo '<title>' . $this -> model -> page . '</title>';
+    }
+    private function showCssLinks() 
+    {
+        echo' <link rel="stylesheet" href="CSS/stylesheet.css">';
+    }
+    private function showJSLinks() 
+    {
+        echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>'; 
+        echo '<script src="scripts/rating.js"></script>';
+    }
+    private function showHeaderStart() 
+    {
+        echo '<header><h1>';
+    }
+    protected function showHeader() 
+    {
+        echo 'moet overriden worden';
+    }
+    private function showHeaderEnd() 
+    {
+        echo '</h1></header>';
+    }
 
     private function showMenu()
     {
@@ -41,8 +60,9 @@ class BasicDoc extends HtmlDoc
 
     protected function showHeadContent() 
     {
-        $this->showTitle();
-        $this->showCSSLinks();
+        $this -> showTitle();
+        $this -> showCSSLinks();
+        $this -> showJSLinks();
     }
  
     protected function showBodyContent() 
