@@ -53,7 +53,11 @@ class RatingModel extends PageModel
     {
         $value = $this -> crud -> readRatingByUserId($this -> sessionManager -> getLoggedInUserId(), $this -> itemId);
         //var_dump($value);
-        $this -> myRating = new ItemRating($value -> item_id, $value -> stars);
+        if ($value) {
+            $this -> myRating = new ItemRating($value -> item_id, $value -> stars);
+        } else {
+            $this -> myRating = new ItemRating($this -> itemId, 0);
+        }
     }
 
     public function getAvgRating()

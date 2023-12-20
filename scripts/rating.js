@@ -50,13 +50,15 @@ function retrieveRating(itemId)
     $.get("index.php?action=ajax&function=getRating&id="+itemId,
     function (data, status){
         console.log(data)
-        const
         const output = JSON.parse(data)
         const avgRating = output[0]
         const myRating = output[1]
         showStars(avgRating.itemId, avgRating.stars, "avg")
-        showStars(0, 0, "my")
-        showStars(myRating.itemId, myRating.stars, "my")
+        if (myRating.itemId && myRating.stars){
+            showStars(myRating.itemId, myRating.stars, "my")
+        } else {
+        showStars(itemId, 0, "my")
+        }
     })
 }
 
